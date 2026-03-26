@@ -87,6 +87,11 @@ namespace MediaTekDocuments.controller
             return access.GetExemplairesRevue(idDocuement);
         }
 
+        public List<Suivi> GetAllSuivis(string idDocument)
+        {
+            return access.GetAllSuivis(idDocument);
+        }
+
         /// <summary>
         /// Crée un exemplaire d'une revue dans la bdd
         /// </summary>
@@ -95,6 +100,21 @@ namespace MediaTekDocuments.controller
         public bool CreerExemplaire(Exemplaire exemplaire)
         {
             return access.CreerExemplaire(exemplaire);
+        }
+
+        public bool CreerSuivi(Suivi suivi)
+        {
+            return access.CreerSuivi(suivi);
+        }
+
+        public bool ModifiSuivi(Suivi suivi)
+        {
+            return access.ModifiSuivi(suivi);
+        }
+
+        public bool SupprimerSuivi(string suivi)
+        {
+            return access.SupprimerSuivi(suivi);
         }
     }
 }

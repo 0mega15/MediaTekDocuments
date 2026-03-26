@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MediaTekDocuments.manager;
 using MediaTekDocuments.model;
-using MediaTekDocuments.manager;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace MediaTekDocuments.dal
 {
@@ -37,7 +38,9 @@ namespace MediaTekDocuments.dal
         private const string POST = "POST";
         /// <summary>
         /// méthode HTTP pour update
+        private const string PUT = "PUT";
 
+        private const string DELETE = "DELETE";
         /// <summary>
         /// Méthode privée pour créer un singleton
         /// initialise l'accès à l'API
@@ -130,6 +133,13 @@ namespace MediaTekDocuments.dal
             return lesRevues;
         }
 
+        public List<Suivi> GetAllSuivis(string idDocument)
+        {
+            String jsonIdDocument = convertToJson("id", idDocument);
+            List<Suivi> lessuivis = TraitementRecup<Suivi>(GET, "suivi/" + jsonIdDocument, null);
+            return lessuivis;
+        }
+
 
         /// <summary>
         /// Retourne les exemplaires d'une revue
@@ -163,6 +173,50 @@ namespace MediaTekDocuments.dal
             return false;
         }
 
+        public bool CreerSuivi(Suivi suivi)
+        {
+            String jsonSuivi = JsonConvert.SerializeObject(suivi, new CustomDateTimeConverter());
+            try
+            {
+                List<Suivi> liste = TraitementRecup<Suivi>(POST, "suivi", "champs=" + jsonSuivi);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool ModifiSuivi(Suivi suivi)
+        {
+            String jsonSuivi = JsonConvert.SerializeObject(suivi, new CustomDateTimeConverter());
+            try
+            {
+                List<Suivi> liste = TraitementRecup<Suivi>(PUT, "suivi", "id=null&champs=" + jsonSuivi);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool SupprimerSuivi(string id)
+        {
+            try
+            {
+                String jsonIdSuivi = convertToJson("id", id);
+                List<Suivi> liste = TraitementRecup<Suivi>(DELETE, "suivi/"+jsonIdSuivi, null);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
         /// <summary>
         /// Traitement de la récupération du retour de l'api, avec conversion du json en liste pour les select (GET)
         /// </summary>
