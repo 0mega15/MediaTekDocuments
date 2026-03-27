@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 using System.IO;
+using System.Drawing.Text;
+using MediaTekDocuments.manager;
 
 namespace MediaTekDocuments.view
 
@@ -20,6 +22,10 @@ namespace MediaTekDocuments.view
         private readonly BindingSource bdgGenres = new BindingSource();
         private readonly BindingSource bdgPublics = new BindingSource();
         private readonly BindingSource bdgRayons = new BindingSource();
+
+        private readonly BindingSource bdgActionsGenres = new BindingSource();
+        private readonly BindingSource bdgActionsPublics = new BindingSource();
+        private readonly BindingSource bdgActionsRayons = new BindingSource();
 
         /// <summary>
         /// Constructeur : création du contrôleur lié à ce formulaire
@@ -359,6 +365,218 @@ namespace MediaTekDocuments.view
                     break;
             }
             RemplirLivresListe(sortedList);
+        }
+
+        /// <summary>
+        /// Ajoute les champs remplis à la liste des livres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLivresActionsAjout_Click(object sender, EventArgs e)
+        {
+            if (btnLivresActionsModifier.Enabled == true)
+            {
+                /// Phase 1 : Indique au code que l'on souhaite ajouter un élément.
+                /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
+                visibiliteChamps(false, "Ajout");
+                txbLivresNumero.Text = (lesLivres.Count + 1).ToString("D5");
+
+            }
+            else
+            {
+                /// Phase 2 : Ajoute les champs remplis à la liste.
+                /// 
+                var request = MessageBox.Show("Souhaitez-vous ajouter ce livre au catalogue ?", 
+                    "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (request == DialogResult.Yes)
+                {
+                    /// vérifie si tous les champs sont remplis.
+                    if (txbLivresTitre.Text == null || txbLivresIsbn.Text == null || txbLivresAuteur.Text == null || txbLivresCollection.Text == null
+                        || cbxActionsLivresGenres.SelectedIndex == -1 || cbxActionsLivresPublics.SelectedIndex == -1 || cbxActionsLivresRayons.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Tous les champs ne sont pas remplis. La demande ne peut pas être effectuée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        Genre selectedGenre = (Genre)cbxActionsLivresGenres.SelectedItem;
+                        Public selectedPublic = (Public)cbxActionsLivresPublics.SelectedItem;
+                        Rayon selectedRayon = (Rayon)cbxActionsLivresRayons.SelectedItem;
+
+                        Livre nvLivre = new Livre(
+                            txbLivresNumero.Text,
+                            txbLivresTitre.Text,
+                            txbLivresImage.Text,
+                            txbLivresIsbn.Text,
+                            txbLivresAuteur.Text,
+                            txbLivresCollection.Text,
+                            selectedGenre.Id,
+                            selectedGenre.Libelle,
+                            selectedPublic.Id,
+                            selectedPublic.Libelle,
+                            selectedRayon.Id,
+                            selectedRayon.Libelle
+                            );
+
+                        if (controller.CreerLivre(nvLivre) == true)
+                        {
+                            visibiliteChamps(true, "Ajout");
+
+                            MessageBox.Show("Livre ajouté avec succès.");
+                            lesLivres = controller.GetAllLivres();
+                            RemplirLivresListeComplete();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erreur lors de l'ajout.");
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Modifie le champ sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLivresActionsModifier_Click(object sender, EventArgs e)
+        {
+            /// sauvegarde les anciennes valeurs dans des variables. 
+            if (btnLivresActionsAjout.Enabled == true)
+            {
+                /// Phase 1 : Indique au code que l'on souhaite modifier un élément.
+                /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
+                visibiliteChamps(false, "Modifier");
+                cbxActionsLivresGenres.Text = txbLivresGenre.Text;
+                cbxActionsLivresPublics.Text = txbLivresPublic.Text;
+                cbxActionsLivresRayons.Text = txbLivresRayon.Text;
+
+            }
+            else
+            {
+                /// Phase 2 : Modifie le champ.
+                /// 
+                visibiliteChamps(true, "Modifier");
+
+                var request = MessageBox.Show("Souhaitez-vous modifier ce livre ?",
+                 "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (request == DialogResult.Yes)
+                {
+                    /// vérifie si tous les champs sont remplis.
+                    if (txbLivresTitre.Text == null || txbLivresIsbn.Text == null || txbLivresAuteur.Text == null || txbLivresCollection.Text == null
+                        || cbxActionsLivresGenres.SelectedIndex == -1 || cbxActionsLivresPublics.SelectedIndex == -1 || cbxActionsLivresRayons.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Tous les champs ne sont pas remplis. La demande ne peut pas être effectuée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        Genre selectedGenre = (Genre)cbxActionsLivresGenres.SelectedItem;
+                        Public selectedPublic = (Public)cbxActionsLivresPublics.SelectedItem;
+                        Rayon selectedRayon = (Rayon)cbxActionsLivresRayons.SelectedItem;
+
+                        Livre nvLivre = new Livre(
+                            txbLivresNumero.Text,
+                            txbLivresTitre.Text,
+                            txbLivresImage.Text,
+                            txbLivresIsbn.Text,
+                            txbLivresAuteur.Text,
+                            txbLivresCollection.Text,
+                            selectedGenre.Id,
+                            selectedGenre.Libelle,
+                            selectedPublic.Id,
+                            selectedPublic.Libelle,
+                            selectedRayon.Id,
+                            selectedRayon.Libelle
+                            );
+
+                        if (controller.CreerLivre(nvLivre) == true)
+                        {
+                            visibiliteChamps(true, "Ajout");
+
+                            MessageBox.Show("Livre ajouté avec succès.");
+                            lesLivres = controller.GetAllLivres();
+                            RemplirLivresListeComplete();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erreur lors de l'ajout.");
+                        }
+                    }
+
+                }
+            }
+        }
+        /// <summary>
+        /// Supprime le champ sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLivresActionsSupprimer_Click(object sender, EventArgs e)
+        {
+            if (btnLivresActionsAjout.Enabled == true)
+            {
+                /// Phase 1 : Indique au code que l'on souhaite modifier un élément.
+                /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
+                visibiliteChamps(false, "Supprimer");
+
+
+            }
+            else
+            {
+                /// Phase 2 : Supprime le champ.
+                /// 
+                visibiliteChamps(true, "Supprimer");
+            }
+        }
+        /// <summary>
+        /// Change la visibilité des champs pour l'ajout, la modification ou la suppression d'un livre.
+        /// </summary>
+        /// <param name="result"></param>
+        private void visibiliteChamps(bool result, string bouton)
+        {
+            if (bouton == "Ajout")
+            {
+                VideLivresInfos();
+                dgvLivresListe.Visible = result;
+
+                btnLivresActionsModifier.Enabled = result;
+                btnLivresActionsSupprimer.Enabled = result;
+
+                txbLivresAuteur.ReadOnly = result;
+            }
+            else if (bouton == "Modifier")
+            {
+                dgvLivresListe.Enabled = result;
+
+                btnLivresActionsAjout.Enabled = result;
+                btnLivresActionsSupprimer.Enabled = result;
+
+                txbLivresAuteur.ReadOnly = result;
+                
+            }
+            else
+            {
+                dgvLivresListe.Enabled = result;
+
+                btnLivresActionsModifier.Enabled = result;
+                btnLivresActionsAjout.Enabled = result;
+            }
+            if (bouton != "Supprimer")
+            {
+                txbLivresCollection.ReadOnly = result;
+                txbLivresImage.ReadOnly = result;
+                txbLivresIsbn.ReadOnly = result;
+                /// genre
+                RemplirComboCategorie(controller.GetAllGenres(), bdgActionsGenres, cbxActionsLivresGenres);
+                cbxActionsLivresGenres.Visible = !result;
+                /// public
+                RemplirComboCategorie(controller.GetAllPublics(), bdgActionsPublics, cbxActionsLivresPublics);
+                cbxActionsLivresPublics.Visible = !result;
+                /// rayon
+                RemplirComboCategorie(controller.GetAllRayons(), bdgActionsRayons, cbxActionsLivresRayons);
+                cbxActionsLivresRayons.Visible = !result;
+
+                txbLivresTitre.ReadOnly = result;
+            }
         }
         #endregion
 

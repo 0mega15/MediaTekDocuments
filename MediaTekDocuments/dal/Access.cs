@@ -7,6 +7,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace MediaTekDocuments.dal
 {
@@ -162,7 +163,26 @@ namespace MediaTekDocuments.dal
             }
             return false;
         }
-
+        /// <summary>
+        /// Ajoute le livre dans la base de données
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
+        public bool CreerLivre(Livre livre)
+        {
+            String jsonLivre = JsonConvert.SerializeObject(livre, new CustomDateTimeConverter());
+            Console.WriteLine(jsonLivre);
+            try
+            {
+                List<Livre> liste = TraitementRecup<Livre>(POST, "livre", "champs=" + jsonLivre);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
         /// <summary>
         /// Traitement de la récupération du retour de l'api, avec conversion du json en liste pour les select (GET)
         /// </summary>
@@ -243,6 +263,7 @@ namespace MediaTekDocuments.dal
                 serializer.Serialize(writer, value);
             }
         }
+
 
     }
 }

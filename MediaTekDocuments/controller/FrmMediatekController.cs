@@ -96,5 +96,14 @@ namespace MediaTekDocuments.controller
         {
             return access.CreerExemplaire(exemplaire);
         }
+        /// <summary>
+        /// Créé un nouveau livre dans la bdd
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
+        public bool CreerLivre(Livre livre)
+        {
+            return access.CreerLivre(livre);
+        }
     }
 }
