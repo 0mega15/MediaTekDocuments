@@ -140,6 +140,18 @@ namespace MediaTekDocuments.dal
             return lessuivis;
         }
 
+        public List<Abonnement> GetAllAbonnements(string idDocument)
+        {
+            String jsonIdDocument = convertToJson("id", idDocument);
+            List<Abonnement> lesAbonnements = TraitementRecup<Abonnement>(GET, "abonnement/" + jsonIdDocument, null);
+            return lesAbonnements;
+        }
+
+        public List<InfosExpiration> GetAbonnementExpiration()
+        {
+            List<InfosExpiration> lesAbonnementExpirations = TraitementRecup<InfosExpiration>(GET, "finAbonnement", null);
+            return lesAbonnementExpirations;
+        }
 
         /// <summary>
         /// Retourne les exemplaires d'une revue
@@ -217,6 +229,52 @@ namespace MediaTekDocuments.dal
             }
             return false;
         }
+
+        public bool CreerAbonnement(Abonnement abonnement)
+        {
+            String jsonAbonnement = JsonConvert.SerializeObject(abonnement, new CustomDateTimeConverter());
+            try
+            {
+                List<Abonnement> liste = TraitementRecup<Abonnement>(POST, "abonnement", "champs=" + jsonAbonnement);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool ModifiAbonnement(Abonnement abonnement)
+        {
+            String jsonAbonnement = JsonConvert.SerializeObject(abonnement, new CustomDateTimeConverter());
+            try
+            {
+                List<Abonnement> liste = TraitementRecup<Abonnement>(PUT, "abonnement", "id=null&champs=" + jsonAbonnement);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool SupprimerAbonnement(string id)
+        {
+            try
+            {
+                String jsonIdAbonnement = convertToJson("id", id);
+                List<Abonnement> liste = TraitementRecup<Abonnement>(DELETE, "abonnement/" + jsonIdAbonnement, null);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
         /// <summary>
         /// Traitement de la récupération du retour de l'api, avec conversion du json en liste pour les select (GET)
         /// </summary>
