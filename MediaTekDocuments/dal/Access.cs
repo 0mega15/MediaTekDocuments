@@ -38,7 +38,12 @@ namespace MediaTekDocuments.dal
         private const string POST = "POST";
         /// <summary>
         /// méthode HTTP pour update
-
+        /// </summary>
+        private const string PUT = "PUT";
+        /// <summary>
+        /// méthode HTTP pour delete
+        /// </summary>
+        private const string DELETE = "DELETE";
         /// <summary>
         /// Méthode privée pour créer un singleton
         /// initialise l'accès à l'API
@@ -64,7 +69,7 @@ namespace MediaTekDocuments.dal
         /// <returns>instance unique de la classe</returns>
         public static Access GetInstance()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new Access();
             }
@@ -183,6 +188,54 @@ namespace MediaTekDocuments.dal
             }
             return false;
         }
+        /// <summary>
+        /// Modifie un livre sélectionné dans la base de données
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
+        public bool ModifierLivre(Livre livre)
+        {
+            String jsonLivre = JsonConvert.SerializeObject(livre, new CustomDateTimeConverter());
+            Console.WriteLine(jsonLivre);
+            try
+            {
+                List<Livre> liste = TraitementRecup<Livre>(PUT, "livre", "champs=" + jsonLivre);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        /// <summary>
+        /// Supprime un livre sélectionné dans la base de données
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
+    public bool SupprimerLivre(Livre livre)
+    {
+        try
+        {
+            var livreData = new { Id = livre.Id };
+            string jsonLivre = JsonConvert.SerializeObject(livreData, new CustomDateTimeConverter());
+
+            JObject retour = api.RecupDistant(DELETE, "livre", "champs=" + jsonLivre);
+
+            string code = (string)retour["code"];
+            string message = (string)retour["message"];
+            Console.WriteLine($"Code : {code}, Message : {message}");
+
+            return code.Equals("200");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Message}\nStack Trace : {ex.StackTrace}");
+            MessageBox.Show($"Erreur lors de la suppression : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+    }
+
         /// <summary>
         /// Traitement de la récupération du retour de l'api, avec conversion du json en liste pour les select (GET)
         /// </summary>
