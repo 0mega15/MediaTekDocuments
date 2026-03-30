@@ -905,7 +905,207 @@ namespace MediaTekDocuments.view
             txbDvdNumRecherche.Text = "";
             txbDvdTitreRecherche.Text = "";
         }
+        private void btnDVDActionsAjout_Click(object sender, EventArgs e)
+        {
+            if (btnDVDActionsModifier.Enabled == true)
+            {
+                /// Phase 1 : Indique au code que l'on souhaite ajouter un élément.
+                /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
+                visibiliteChampsDvd(false, "Ajout");
+                txbDvdNumero.Text = (lesDvd.Count + 1).ToString("D5");
 
+            }
+            else
+            {
+                /// Phase 2 : Ajoute les champs remplis à la liste.
+                /// 
+                var request = MessageBox.Show("Souhaitez-vous ajouter ce DVD au catalogue ?",
+                    "Confirmation", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (request == DialogResult.Yes)
+                {
+                    /// vérifie si tous les champs sont remplis.
+                    if (txbDvdTitre.Text == null || 
+                       )
+                    {
+                        MessageBox.Show("Tous les champs ne sont pas remplis. La demande ne peut pas être effectuée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        Genre selectedGenre = (Genre)cbxActionsDvdGenres.SelectedItem;
+                        Public selectedPublic = (Public)cbxActionsDvdPublics.SelectedItem;
+                        Rayon selectedRayon = (Rayon)cbxActionsDvdRayons.SelectedItem;
+
+                        Livre nvLivre = new Livre(
+                            txbLivresNumero.Text,
+                            txbLivresTitre.Text,
+                            txbLivresImage.Text,
+                            txbLivresIsbn.Text,
+                            txbLivresAuteur.Text,
+                            txbLivresCollection.Text,
+                            selectedGenre.Id,
+                            selectedGenre.Libelle,
+                            selectedPublic.Id,
+                            selectedPublic.Libelle,
+                            selectedRayon.Id,
+                            selectedRayon.Libelle
+                            );
+
+                        if (controller.CreerLivre(nvLivre) == true)
+                        {
+                            visibiliteChamps(true, "Ajout");
+
+                            MessageBox.Show("Livre ajouté avec succès.");
+                            lesLivres = controller.GetAllLivres();
+                            RemplirLivresListeComplete();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erreur lors de l'ajout.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                if (request == DialogResult.Cancel)
+                {
+                    visibiliteChamps(true, "Ajout");
+                }
+            }
+        }
+
+        private void btnDVDActionsModifier_Click(object sender, EventArgs e)
+        {
+
+            /// sauvegarde les anciennes valeurs dans des variables. 
+            if (btnDVDActionsAjout.Enabled == true)
+            {
+
+                /// Phase 1 : Indique au code que l'on souhaite modifier un élément.
+                /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
+                if (dgvDvdListe.SelectedRows.Count == 1)
+                {
+                    visibiliteChamps(false, "Modifier");
+                    cbxActionsDvdGenres.Text = txbDvdGenre.Text;
+                    cbxActionsDvdPublics.Text = txbDvdPublic.Text;
+                    cbxActionsDvdRayons.Text = txbDvdRayon.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Veuillez ne sélectionner qu'une entrée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else
+            {
+                /// Phase 2 : Modifie le champ.
+                /// 
+
+                var request = MessageBox.Show("Souhaitez-vous modifier ce DVD ?",
+                 "Confirmation", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (request == DialogResult.Yes)
+                {
+                    /// vérifie si tous les champs sont remplis.
+                    if (txbLivresTitre.Text == null || txbLivresIsbn.Text == null || txbLivresAuteur.Text == null || txbLivresCollection.Text == null
+                        || cbxActionsLivresGenres.SelectedIndex == -1 || cbxActionsLivresPublics.SelectedIndex == -1 || cbxActionsLivresRayons.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Tous les champs ne sont pas remplis. La demande ne peut pas être effectuée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        Genre selectedGenre = (Genre)cbxActionsLivresGenres.SelectedItem;
+                        Public selectedPublic = (Public)cbxActionsLivresPublics.SelectedItem;
+                        Rayon selectedRayon = (Rayon)cbxActionsLivresRayons.SelectedItem;
+
+                        Livre nvLivre = new Livre(
+                            txbLivresNumero.Text,
+                            txbLivresTitre.Text,
+                            txbLivresImage.Text,
+                            txbLivresIsbn.Text,
+                            txbLivresAuteur.Text,
+                            txbLivresCollection.Text,
+                            selectedGenre.Id,
+                            selectedGenre.Libelle,
+                            selectedPublic.Id,
+                            selectedPublic.Libelle,
+                            selectedRayon.Id,
+                            selectedRayon.Libelle
+                            );
+
+                        if (controller.ModifierLivre(nvLivre) == true)
+                        {
+                            visibiliteChamps(true, "Modifier");
+
+                            MessageBox.Show("Livre modifié avec succès.");
+                            lesLivres = controller.GetAllLivres();
+                            RemplirLivresListeComplete();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erreur lors de la modification.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                }
+                if (request == DialogResult.Cancel)
+                {
+                    visibiliteChamps(true, "Modifier");
+                }
+            }
+        }
+
+        private void btnDVDActionsSupprimer_Click(object sender, EventArgs e)
+        {
+            visibiliteChamps(false, "Supprimer");
+            cbxActionsLivresGenres.Text = txbLivresGenre.Text;
+            cbxActionsLivresPublics.Text = txbLivresPublic.Text;
+            cbxActionsLivresRayons.Text = txbLivresRayon.Text;
+
+            if (dgvLivresListe.SelectedRows.Count == 1)
+            {
+                var request = MessageBox.Show("Souhaitez-vous supprimer le livre suivant : " + txbLivresTitre.Text + " ?",
+                                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (request == DialogResult.Yes)
+                {
+                    Genre selectedGenre = (Genre)cbxActionsLivresGenres.SelectedItem;
+                    Public selectedPublic = (Public)cbxActionsLivresPublics.SelectedItem;
+                    Rayon selectedRayon = (Rayon)cbxActionsLivresRayons.SelectedItem;
+
+                    Livre nvLivre = new Livre(
+                        txbLivresNumero.Text,
+                        txbLivresTitre.Text,
+                        txbLivresImage.Text,
+                        txbLivresIsbn.Text,
+                        txbLivresAuteur.Text,
+                        txbLivresCollection.Text,
+                        selectedGenre.Id,
+                        selectedGenre.Libelle,
+                        selectedPublic.Id,
+                        selectedPublic.Libelle,
+                        selectedRayon.Id,
+                        selectedRayon.Libelle
+                        );
+
+                    if (controller.SupprimerLivre(nvLivre) == true)
+                    {
+                        visibiliteChamps(true, "Supprimer");
+
+                        MessageBox.Show("Livre supprimé avec succès.");
+                        lesLivres = controller.GetAllLivres();
+                        RemplirLivresListeComplete();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur lors de la suppression.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    visibiliteChamps(true, "Supprimer");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez ne sélectionner qu'une entrée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         /// <summary>
         /// Tri sur les colonnes
         /// </summary>
@@ -941,6 +1141,55 @@ namespace MediaTekDocuments.view
                     break;
             }
             RemplirDvdListe(sortedList);
+        }
+        /// <summary>
+        /// Change la visibilité des champs pour l'ajout, la modification ou la suppression d'un DVD.
+        /// </summary>
+        /// <param name="result"></param>
+        private void visibiliteChampsDvd(bool result, string bouton)
+        {
+            if (bouton == "Ajout")
+            {
+                VideLivresInfos();
+                dgvDvdListe.Visible = result;
+
+                btnDVDActionsModifier.Enabled = result;
+                btnDVDActionsSupprimer.Enabled = result;
+
+                txbDvdRealisateur.ReadOnly = result;
+            }
+            else if (bouton == "Modifier")
+            {
+                dgvDvdListe.Enabled = result;
+
+                btnDVDActionsAjout.Enabled = result;
+                btnDVDActionsSupprimer.Enabled = result;
+
+                txbDvdRealisateur.ReadOnly = result;
+
+            }
+            else
+            {
+                dgvDvdListe.Enabled = result;
+
+                btnDVDActionsModifier.Enabled = result;
+                btnDVDActionsAjout.Enabled = result;
+            }
+            txbDvdSynopsis.ReadOnly = result;
+            txbDvdImage.ReadOnly = result;
+            txbDvdDuree.ReadOnly = result;
+            txbDvdTitre.ReadOnly = result;
+
+            
+            /// genre
+            RemplirComboCategorie(controller.GetAllGenres(), bdgActionsGenres, cbxActionsLivresGenres);
+            txbDvdGenre.Visible = !result;
+            /// public
+            RemplirComboCategorie(controller.GetAllPublics(), bdgActionsPublics, cbxActionsLivresPublics);
+            txbDvdPublic.Visible = !result;
+            /// rayon
+            RemplirComboCategorie(controller.GetAllRayons(), bdgActionsRayons, cbxActionsLivresRayons);
+            txbDvdRayon.Visible = !result;
         }
         #endregion
 

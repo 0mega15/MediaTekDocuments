@@ -193,6 +193,9 @@ namespace MediaTekDocuments.view
             this.label53 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.btnReceptionRechercher = new System.Windows.Forms.Button();
+            this.cbxActionsDvdRayons = new System.Windows.Forms.ComboBox();
+            this.cbxActionsDvdPublics = new System.Windows.Forms.ComboBox();
+            this.cbxActionsDvdGenres = new System.Windows.Forms.ComboBox();
             this.tabOngletsApplication.SuspendLayout();
             this.tabLivres.SuspendLayout();
             this.grpLivresInfos.SuspendLayout();
@@ -771,6 +774,9 @@ namespace MediaTekDocuments.view
             // 
             // grpDvdInfos
             // 
+            this.grpDvdInfos.Controls.Add(this.cbxActionsDvdRayons);
+            this.grpDvdInfos.Controls.Add(this.cbxActionsDvdPublics);
+            this.grpDvdInfos.Controls.Add(this.cbxActionsDvdGenres);
             this.grpDvdInfos.Controls.Add(this.grpDVDActions);
             this.grpDvdInfos.Controls.Add(this.label58);
             this.grpDvdInfos.Controls.Add(this.txbDvdDuree);
@@ -824,6 +830,7 @@ namespace MediaTekDocuments.view
             this.btnDVDActionsSupprimer.TabIndex = 36;
             this.btnDVDActionsSupprimer.Text = "Supprimer";
             this.btnDVDActionsSupprimer.UseVisualStyleBackColor = true;
+            this.btnDVDActionsSupprimer.Click += new System.EventHandler(this.btnDVDActionsSupprimer_Click);
             // 
             // btnDVDActionsModifier
             // 
@@ -834,6 +841,7 @@ namespace MediaTekDocuments.view
             this.btnDVDActionsModifier.TabIndex = 35;
             this.btnDVDActionsModifier.Text = "Modifier";
             this.btnDVDActionsModifier.UseVisualStyleBackColor = true;
+            this.btnDVDActionsModifier.Click += new System.EventHandler(this.btnDVDActionsModifier_Click);
             // 
             // btnDVDActionsAjout
             // 
@@ -844,6 +852,7 @@ namespace MediaTekDocuments.view
             this.btnDVDActionsAjout.TabIndex = 34;
             this.btnDVDActionsAjout.Text = "Ajouter";
             this.btnDVDActionsAjout.UseVisualStyleBackColor = true;
+            this.btnDVDActionsAjout.Click += new System.EventHandler(this.btnDVDActionsAjout_Click);
             // 
             // label58
             // 
@@ -2126,6 +2135,36 @@ namespace MediaTekDocuments.view
             this.btnReceptionRechercher.UseVisualStyleBackColor = true;
             this.btnReceptionRechercher.Click += new System.EventHandler(this.btnReceptionRechercher_Click);
             // 
+            // cbxActionsDvdRayons
+            // 
+            this.cbxActionsDvdRayons.FormattingEnabled = true;
+            this.cbxActionsDvdRayons.Location = new System.Drawing.Point(485, 233);
+            this.cbxActionsDvdRayons.Margin = new System.Windows.Forms.Padding(4);
+            this.cbxActionsDvdRayons.Name = "cbxActionsDvdRayons";
+            this.cbxActionsDvdRayons.Size = new System.Drawing.Size(236, 24);
+            this.cbxActionsDvdRayons.TabIndex = 36;
+            this.cbxActionsDvdRayons.Visible = false;
+            // 
+            // cbxActionsDvdPublics
+            // 
+            this.cbxActionsDvdPublics.FormattingEnabled = true;
+            this.cbxActionsDvdPublics.Location = new System.Drawing.Point(485, 202);
+            this.cbxActionsDvdPublics.Margin = new System.Windows.Forms.Padding(4);
+            this.cbxActionsDvdPublics.Name = "cbxActionsDvdPublics";
+            this.cbxActionsDvdPublics.Size = new System.Drawing.Size(236, 24);
+            this.cbxActionsDvdPublics.TabIndex = 35;
+            this.cbxActionsDvdPublics.Visible = false;
+            // 
+            // cbxActionsDvdGenres
+            // 
+            this.cbxActionsDvdGenres.FormattingEnabled = true;
+            this.cbxActionsDvdGenres.Location = new System.Drawing.Point(485, 172);
+            this.cbxActionsDvdGenres.Margin = new System.Windows.Forms.Padding(4);
+            this.cbxActionsDvdGenres.Name = "cbxActionsDvdGenres";
+            this.cbxActionsDvdGenres.Size = new System.Drawing.Size(236, 24);
+            this.cbxActionsDvdGenres.TabIndex = 34;
+            this.cbxActionsDvdGenres.Visible = false;
+            // 
             // FrmMediatek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2339,6 +2378,9 @@ namespace MediaTekDocuments.view
         private System.Windows.Forms.ComboBox cbxActionsLivresRayons;
         private System.Windows.Forms.ComboBox cbxActionsLivresPublics;
         private System.Windows.Forms.ComboBox cbxActionsLivresGenres;
+        private System.Windows.Forms.ComboBox cbxActionsDvdRayons;
+        private System.Windows.Forms.ComboBox cbxActionsDvdPublics;
+        private System.Windows.Forms.ComboBox cbxActionsDvdGenres;
     }
 }
 
