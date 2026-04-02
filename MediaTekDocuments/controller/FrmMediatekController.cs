@@ -87,6 +87,20 @@ namespace MediaTekDocuments.controller
             return access.GetExemplairesRevue(idDocuement);
         }
 
+        public List<Suivi> GetAllSuivis(string idDocument)
+        {
+            return access.GetAllSuivis(idDocument);
+        }
+
+        public List<Abonnement> GetAllAbonnements(string idDocument)
+        {
+            return access.GetAllAbonnements(idDocument);
+        }
+
+        public List<InfosExpiration> GetAbonnementExpiration()
+        {
+            return access.GetAbonnementExpiration();
+        }
         /// <summary>
         /// Crée un exemplaire d'une revue dans la bdd
         /// </summary>
@@ -96,6 +110,34 @@ namespace MediaTekDocuments.controller
         {
             return access.CreerExemplaire(exemplaire);
         }
+
+        public bool CreerSuivi(Suivi suivi)
+        {
+            return access.CreerSuivi(suivi);
+        }
+
+        public bool ModifiSuivi(Suivi suivi)
+        {
+            return access.ModifiSuivi(suivi);
+        }
+
+        public bool SupprimerSuivi(string suivi)
+        {
+            return access.SupprimerSuivi(suivi);
+        }
+
+        public bool CreerAbonnement(Abonnement abonnement)
+        {
+            return access.CreerAbonnement(abonnement);
+        }
+         public bool ModifiAbonnement(Abonnement abonnement)
+        {
+            return access.ModifiAbonnement(abonnement);
+        }
+
+        public bool SupprimerAbonnement(string abonnement)
+        {
+            return access.SupprimerAbonnement(abonnement);
         /// <summary>
         /// Créé un nouveau livre dans la bdd
         /// </summary>

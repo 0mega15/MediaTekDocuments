@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MediaTekDocuments.manager;
 using MediaTekDocuments.model;
-using MediaTekDocuments.manager;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Xml.Linq;
 using System.Windows.Forms;
 
 namespace MediaTekDocuments.dal
@@ -136,6 +137,25 @@ namespace MediaTekDocuments.dal
             return lesRevues;
         }
 
+        public List<Suivi> GetAllSuivis(string idDocument)
+        {
+            String jsonIdDocument = convertToJson("id", idDocument);
+            List<Suivi> lessuivis = TraitementRecup<Suivi>(GET, "suivi/" + jsonIdDocument, null);
+            return lessuivis;
+        }
+
+        public List<Abonnement> GetAllAbonnements(string idDocument)
+        {
+            String jsonIdDocument = convertToJson("id", idDocument);
+            List<Abonnement> lesAbonnements = TraitementRecup<Abonnement>(GET, "abonnement/" + jsonIdDocument, null);
+            return lesAbonnements;
+        }
+
+        public List<InfosExpiration> GetAbonnementExpiration()
+        {
+            List<InfosExpiration> lesAbonnementExpirations = TraitementRecup<InfosExpiration>(GET, "finAbonnement", null);
+            return lesAbonnementExpirations;
+        }
 
         /// <summary>
         /// Retourne les exemplaires d'une revue
@@ -377,6 +397,96 @@ namespace MediaTekDocuments.dal
                 MessageBox.Show($"Erreur lors de la suppression : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+        }
+
+        public bool CreerSuivi(Suivi suivi)
+        {
+            String jsonSuivi = JsonConvert.SerializeObject(suivi, new CustomDateTimeConverter());
+            try
+            {
+                List<Suivi> liste = TraitementRecup<Suivi>(POST, "suivi", "champs=" + jsonSuivi);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool ModifiSuivi(Suivi suivi)
+        {
+            String jsonSuivi = JsonConvert.SerializeObject(suivi, new CustomDateTimeConverter());
+            try
+            {
+                List<Suivi> liste = TraitementRecup<Suivi>(PUT, "suivi", "id=null&champs=" + jsonSuivi);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool SupprimerSuivi(string id)
+        {
+            try
+            {
+                String jsonIdSuivi = convertToJson("id", id);
+                List<Suivi> liste = TraitementRecup<Suivi>(DELETE, "suivi/"+jsonIdSuivi, null);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool CreerAbonnement(Abonnement abonnement)
+        {
+            String jsonAbonnement = JsonConvert.SerializeObject(abonnement, new CustomDateTimeConverter());
+            try
+            {
+                List<Abonnement> liste = TraitementRecup<Abonnement>(POST, "abonnement", "champs=" + jsonAbonnement);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool ModifiAbonnement(Abonnement abonnement)
+        {
+            String jsonAbonnement = JsonConvert.SerializeObject(abonnement, new CustomDateTimeConverter());
+            try
+            {
+                List<Abonnement> liste = TraitementRecup<Abonnement>(PUT, "abonnement", "id=null&champs=" + jsonAbonnement);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool SupprimerAbonnement(string id)
+        {
+            try
+            {
+                String jsonIdAbonnement = convertToJson("id", id);
+                List<Abonnement> liste = TraitementRecup<Abonnement>(DELETE, "abonnement/" + jsonIdAbonnement, null);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
         }
 
         /// <summary>
