@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Xml.Linq;
+using System.Windows.Forms;
 
 namespace MediaTekDocuments.dal
 {
@@ -38,8 +39,11 @@ namespace MediaTekDocuments.dal
         private const string POST = "POST";
         /// <summary>
         /// méthode HTTP pour update
+        /// </summary>
         private const string PUT = "PUT";
-
+        /// <summary>
+        /// méthode HTTP pour delete
+        /// </summary>
         private const string DELETE = "DELETE";
         /// <summary>
         /// Méthode privée pour créer un singleton
@@ -66,7 +70,7 @@ namespace MediaTekDocuments.dal
         /// <returns>instance unique de la classe</returns>
         public static Access GetInstance()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new Access();
             }
@@ -183,6 +187,216 @@ namespace MediaTekDocuments.dal
                 Console.WriteLine(ex.Message);
             }
             return false;
+        }
+        /// <summary>
+        /// Ajoute le livre dans la base de données
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
+        public bool CreerLivre(Livre livre)
+        {
+            String jsonLivre = JsonConvert.SerializeObject(livre, new CustomDateTimeConverter());
+            Console.WriteLine(jsonLivre);
+            try
+            {
+                List<Livre> liste = TraitementRecup<Livre>(POST, "livre", "champs=" + jsonLivre);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        /// <summary>
+        /// Modifie un livre sélectionné dans la base de données
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
+        public bool ModifierLivre(Livre livre)
+        {
+            String jsonLivre = JsonConvert.SerializeObject(livre, new CustomDateTimeConverter());
+            Console.WriteLine(jsonLivre);
+            try
+            {
+                List<Livre> liste = TraitementRecup<Livre>(PUT, "livre", "champs=" + jsonLivre);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        /// <summary>
+        /// Supprime un livre sélectionné dans la base de données
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
+    public bool SupprimerLivre(Livre livre)
+    {
+        try
+        {
+            var livreData = new { Id = livre.Id };
+            string jsonLivre = JsonConvert.SerializeObject(livreData, new CustomDateTimeConverter());
+
+            JObject retour = api.RecupDistant(DELETE, "livre", "champs=" + jsonLivre);
+
+            string code = (string)retour["code"];
+            string message = (string)retour["message"];
+            Console.WriteLine($"Code : {code}, Message : {message}");
+
+            return code.Equals("200");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Message}\nStack Trace : {ex.StackTrace}");
+            MessageBox.Show($"Erreur lors de la suppression : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+    }
+        /// <summary>
+        /// Ajoute le dvd dans la base de données
+        /// </summary>
+        /// <param name="dvd"></param>
+        /// <returns></returns>
+        public bool CreerDvd(Dvd dvd)
+        {
+            String jsonDvd = JsonConvert.SerializeObject(dvd, new CustomDateTimeConverter());
+            Console.WriteLine(jsonDvd);
+            try
+            {
+                List<Dvd> liste = TraitementRecup<Dvd>(POST, "dvd", "champs=" + jsonDvd);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        /// <summary>
+        /// Modifie un dvd sélectionné dans la base de données
+        /// </summary>
+        /// <param name="dvd"></param>
+        /// <returns></returns>
+        public bool ModifierDvd(Dvd dvd)
+        {
+            String jsonDvd = JsonConvert.SerializeObject(dvd, new CustomDateTimeConverter());
+            Console.WriteLine(jsonDvd);
+            try
+            {
+                List<Dvd> liste = TraitementRecup<Dvd>(PUT, "dvd", "champs=" + jsonDvd);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        /// <summary>
+        /// Supprime un dvd sélectionné dans la base de données
+        /// </summary>
+        /// <param name="dvd"></param>
+        /// <returns></returns>
+        public bool SupprimerDvd(Dvd dvd)
+        {
+            try
+            {
+                var dvdData = new { Id = dvd.Id };
+                string jsonDvd = JsonConvert.SerializeObject(dvdData, new CustomDateTimeConverter());
+
+                JObject retour = api.RecupDistant(DELETE, "dvd", "champs=" + jsonDvd);
+
+                string code = (string)retour["code"];
+                string message = (string)retour["message"];
+                Console.WriteLine($"Code : {code}, Message : {message}");
+
+                return code.Equals("200");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}\nStack Trace : {ex.StackTrace}");
+                MessageBox.Show($"Erreur lors de la suppression : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// Ajoute le Revue dans la base de données
+        /// </summary>
+        /// <param name="revue"></param>
+        /// <returns></returns>
+        public bool CreerRevue(Revue revue)
+        {
+            String jsonrevue = JsonConvert.SerializeObject(revue, new CustomDateTimeConverter());
+            Console.WriteLine(jsonrevue);
+            try
+            {
+                List<Revue> liste = TraitementRecup<Revue>(POST, "revue", "champs=" + jsonrevue);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        /// <summary>
+        /// Modifie un Revue sélectionné dans la base de données
+        /// </summary>
+        /// <param name="revue"></param>
+        /// <returns></returns>
+        public bool ModifierRevue(Revue revue)
+        {
+            String jsonrevue = JsonConvert.SerializeObject(revue, new CustomDateTimeConverter());
+            Console.WriteLine(jsonrevue);
+            try
+            {
+                List<Revue> liste = TraitementRecup<Revue>(PUT, "revue", "champs=" + jsonrevue);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        /// <summary>
+        /// Supprime un dvd sélectionné dans la base de données
+        /// </summary>
+        /// <param name="revue"></param>
+        /// <returns></returns>
+        public bool SupprimerRevue(Revue revue)
+        {
+            try
+            {
+                var dvdData = new { Id = revue.Id };
+                string jsonrevue = JsonConvert.SerializeObject(dvdData, new CustomDateTimeConverter());
+
+                JObject retour = api.RecupDistant(DELETE, "revue", "champs=" + jsonrevue);
+
+                string code = (string)retour["code"];
+                string message = (string)retour["message"];
+                Console.WriteLine($"Code : {code}, Message : {message}");
+
+                return code.Equals("200");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}\nStack Trace : {ex.StackTrace}");
+                MessageBox.Show($"Erreur lors de la suppression : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
 
         public bool CreerSuivi(Suivi suivi)
@@ -355,6 +569,7 @@ namespace MediaTekDocuments.dal
                 serializer.Serialize(writer, value);
             }
         }
+
 
     }
 }
