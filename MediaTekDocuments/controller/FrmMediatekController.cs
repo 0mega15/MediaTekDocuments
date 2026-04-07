@@ -138,6 +138,7 @@ namespace MediaTekDocuments.controller
         public bool SupprimerAbonnement(string abonnement)
         {
             return access.SupprimerAbonnement(abonnement);
+        }
         /// <summary>
         /// Créé un nouveau livre dans la bdd
         /// </summary>
