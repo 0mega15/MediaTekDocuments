@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace MediaTekDocuments
 {
-    public partial class Form1 : Form
+    public partial class FrmAvertissement : Form
     {
 
         private readonly BindingSource bdgAbonnementExpiration = new BindingSource();
         private readonly FrmMediatekController controller;
 
-        public Form1()
+        public FrmAvertissement()
         {
             InitializeComponent();
             this.controller = new FrmMediatekController();

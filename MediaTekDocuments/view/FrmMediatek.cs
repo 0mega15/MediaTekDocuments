@@ -28,15 +28,61 @@ namespace MediaTekDocuments.view
         private readonly BindingSource bdgActionsPublics = new BindingSource();
         private readonly BindingSource bdgActionsRayons = new BindingSource();
 
+        private int LevelId;
         /// <summary>
         /// Constructeur : création du contrôleur lié à ce formulaire
         /// </summary>
-        internal FrmMediatek()
+        internal FrmMediatek(int levelId)
         {
             InitializeComponent();
             this.controller = new FrmMediatekController();
+            new FrmAvertissement().ShowDialog();
+            LevelId = levelId;
         }
 
+        private void FrmMediatek_Load(object sender, EventArgs e)
+        {
+            Verrouillage();
+        }
+        public void Verrouillage()
+        {
+            if (LevelId == 2)
+            {
+                tabOngletsApplication.TabPages.Remove(tabCommandeDvd);
+                tabOngletsApplication.TabPages.Remove(tabCommandeLivre);
+                tabOngletsApplication.TabPages.Remove(tabCommandeRevues);
+                tabOngletsApplication.TabPages.Remove(tabReceptionRevue);
+               
+                grpLivresActions.Visible = false;
+                grpLivresActions.Enabled = false;
+                cbxActionsLivresGenres.Enabled = false;
+                cbxActionsLivresPublics.Enabled = false;
+                cbxActionsLivresRayons.Enabled = false;
+                cbxActionsLivresGenres.Visible = false;
+                cbxActionsLivresPublics.Visible = false;
+                cbxActionsLivresRayons.Visible = false;
+
+                grpDVDActions.Visible = false;
+                grpDVDActions.Enabled = false;
+                cbxActionsDvdGenres.Enabled = false;
+                cbxActionsDvdPublics.Enabled = false;
+                cbxActionsDvdRayons.Enabled = false;
+                cbxActionsDvdGenres.Visible = false;
+                cbxActionsDvdPublics.Visible = false;
+                cbxActionsDvdRayons.Visible = false;
+
+                grpRevuesActions.Visible = false;
+                grpRevuesActions.Enabled = false;
+                cbxActionsRevuesGenres.Enabled = false;
+                cbxActionsRevuesPublics.Enabled = false;
+                cbxActionsRevuesRayons.Enabled = false;
+                cbxActionsRevuesGenres.Visible = false;
+                cbxActionsRevuesPublics.Visible = false;
+                cbxActionsRevuesRayons.Visible = false;
+
+
+            }
+        }
         /// <summary>
         /// Rempli un des 3 combo (genre, public, rayon)
         /// </summary>
@@ -3149,6 +3195,7 @@ namespace MediaTekDocuments.view
             }
         }
 
+        
     }
     #endregion
 }

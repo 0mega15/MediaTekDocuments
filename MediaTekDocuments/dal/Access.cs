@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Linq;
 using System.Xml.Linq;
 using System.Windows.Forms;
+using MediaTekDocuments.view;
 
 namespace MediaTekDocuments.dal
 {
@@ -77,6 +78,12 @@ namespace MediaTekDocuments.dal
             return instance;
         }
 
+        public List<Connexion> GetConnexion(object data)
+        {
+            String jsonData = convertToJson("data", data);
+            List<Connexion> connexions = TraitementRecup<Connexion>(GET, "connexion/" + jsonData, null);
+            return connexions;
+        }
         /// <summary>
         /// Retourne tous les genres à partir de la BDD
         /// </summary>
