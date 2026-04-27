@@ -458,7 +458,7 @@ namespace MediaTekDocuments.view
             this.grpLivresInfos.Margin = new System.Windows.Forms.Padding(4);
             this.grpLivresInfos.Name = "grpLivresInfos";
             this.grpLivresInfos.Padding = new System.Windows.Forms.Padding(4);
-            this.grpLivresInfos.Size = new System.Drawing.Size(1145, 335);
+            this.grpLivresInfos.Size = new System.Drawing.Size(1145, 337);
             this.grpLivresInfos.TabIndex = 19;
             this.grpLivresInfos.TabStop = false;
             this.grpLivresInfos.Text = "Informations détaillées";
