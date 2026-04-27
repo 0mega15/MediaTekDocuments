@@ -412,7 +412,7 @@ namespace MediaTekDocuments.view
             this.tabOngletsApplication.Margin = new System.Windows.Forms.Padding(4);
             this.tabOngletsApplication.Name = "tabOngletsApplication";
             this.tabOngletsApplication.SelectedIndex = 0;
-            this.tabOngletsApplication.Size = new System.Drawing.Size(1177, 840);
+            this.tabOngletsApplication.Size = new System.Drawing.Size(1177, 842);
             this.tabOngletsApplication.TabIndex = 0;
             // 
             // tabLivres
@@ -422,7 +422,7 @@ namespace MediaTekDocuments.view
             this.tabLivres.Location = new System.Drawing.Point(4, 22);
             this.tabLivres.Margin = new System.Windows.Forms.Padding(4);
             this.tabLivres.Name = "tabLivres";
-            this.tabLivres.Size = new System.Drawing.Size(1169, 814);
+            this.tabLivres.Size = new System.Drawing.Size(1169, 816);
             this.tabLivres.TabIndex = 2;
             this.tabLivres.Text = "Livres";
             this.tabLivres.UseVisualStyleBackColor = true;
@@ -466,7 +466,7 @@ namespace MediaTekDocuments.view
             // cbxActionsLivresRayons
             // 
             this.cbxActionsLivresRayons.FormattingEnabled = true;
-            this.cbxActionsLivresRayons.Location = new System.Drawing.Point(542, 207);
+            this.cbxActionsLivresRayons.Location = new System.Drawing.Point(542, 209);
             this.cbxActionsLivresRayons.Name = "cbxActionsLivresRayons";
             this.cbxActionsLivresRayons.Size = new System.Drawing.Size(178, 24);
             this.cbxActionsLivresRayons.TabIndex = 19;
@@ -477,7 +477,7 @@ namespace MediaTekDocuments.view
             this.grpLivresActions.Controls.Add(this.btnLivresActionsSupprimer);
             this.grpLivresActions.Controls.Add(this.btnLivresActionsModifier);
             this.grpLivresActions.Controls.Add(this.btnLivresActionsAjout);
-            this.grpLivresActions.Location = new System.Drawing.Point(12, 269);
+            this.grpLivresActions.Location = new System.Drawing.Point(10, 269);
             this.grpLivresActions.Name = "grpLivresActions";
             this.grpLivresActions.Size = new System.Drawing.Size(535, 58);
             this.grpLivresActions.TabIndex = 34;
@@ -517,7 +517,7 @@ namespace MediaTekDocuments.view
             // cbxActionsLivresPublics
             // 
             this.cbxActionsLivresPublics.FormattingEnabled = true;
-            this.cbxActionsLivresPublics.Location = new System.Drawing.Point(542, 176);
+            this.cbxActionsLivresPublics.Location = new System.Drawing.Point(542, 175);
             this.cbxActionsLivresPublics.Name = "cbxActionsLivresPublics";
             this.cbxActionsLivresPublics.Size = new System.Drawing.Size(178, 24);
             this.cbxActionsLivresPublics.TabIndex = 18;
@@ -526,7 +526,7 @@ namespace MediaTekDocuments.view
             // cbxActionsLivresGenres
             // 
             this.cbxActionsLivresGenres.FormattingEnabled = true;
-            this.cbxActionsLivresGenres.Location = new System.Drawing.Point(542, 146);
+            this.cbxActionsLivresGenres.Location = new System.Drawing.Point(542, 145);
             this.cbxActionsLivresGenres.Name = "cbxActionsLivresGenres";
             this.cbxActionsLivresGenres.Size = new System.Drawing.Size(178, 24);
             this.cbxActionsLivresGenres.TabIndex = 17;
@@ -934,7 +934,7 @@ namespace MediaTekDocuments.view
             this.tabDvd.Location = new System.Drawing.Point(4, 22);
             this.tabDvd.Margin = new System.Windows.Forms.Padding(4);
             this.tabDvd.Name = "tabDvd";
-            this.tabDvd.Size = new System.Drawing.Size(1169, 814);
+            this.tabDvd.Size = new System.Drawing.Size(1169, 816);
             this.tabDvd.TabIndex = 3;
             this.tabDvd.Text = "DVD";
             this.tabDvd.UseVisualStyleBackColor = true;
@@ -970,7 +970,7 @@ namespace MediaTekDocuments.view
             this.grpDvdInfos.Margin = new System.Windows.Forms.Padding(4);
             this.grpDvdInfos.Name = "grpDvdInfos";
             this.grpDvdInfos.Padding = new System.Windows.Forms.Padding(4);
-            this.grpDvdInfos.Size = new System.Drawing.Size(1145, 336);
+            this.grpDvdInfos.Size = new System.Drawing.Size(1145, 338);
             this.grpDvdInfos.TabIndex = 21;
             this.grpDvdInfos.TabStop = false;
             this.grpDvdInfos.Text = "Informations détaillées";
@@ -978,7 +978,7 @@ namespace MediaTekDocuments.view
             // cbxActionsDvdRayons
             // 
             this.cbxActionsDvdRayons.FormattingEnabled = true;
-            this.cbxActionsDvdRayons.Location = new System.Drawing.Point(542, 232);
+            this.cbxActionsDvdRayons.Location = new System.Drawing.Point(542, 234);
             this.cbxActionsDvdRayons.Name = "cbxActionsDvdRayons";
             this.cbxActionsDvdRayons.Size = new System.Drawing.Size(178, 24);
             this.cbxActionsDvdRayons.TabIndex = 36;
@@ -987,7 +987,7 @@ namespace MediaTekDocuments.view
             // cbxActionsDvdPublics
             // 
             this.cbxActionsDvdPublics.FormattingEnabled = true;
-            this.cbxActionsDvdPublics.Location = new System.Drawing.Point(542, 201);
+            this.cbxActionsDvdPublics.Location = new System.Drawing.Point(542, 203);
             this.cbxActionsDvdPublics.Name = "cbxActionsDvdPublics";
             this.cbxActionsDvdPublics.Size = new System.Drawing.Size(178, 24);
             this.cbxActionsDvdPublics.TabIndex = 35;
@@ -996,7 +996,7 @@ namespace MediaTekDocuments.view
             // cbxActionsDvdGenres
             // 
             this.cbxActionsDvdGenres.FormattingEnabled = true;
-            this.cbxActionsDvdGenres.Location = new System.Drawing.Point(542, 170);
+            this.cbxActionsDvdGenres.Location = new System.Drawing.Point(542, 172);
             this.cbxActionsDvdGenres.Name = "cbxActionsDvdGenres";
             this.cbxActionsDvdGenres.Size = new System.Drawing.Size(178, 24);
             this.cbxActionsDvdGenres.TabIndex = 34;
@@ -1007,7 +1007,7 @@ namespace MediaTekDocuments.view
             this.grpDVDActions.Controls.Add(this.btnDVDActionsSupprimer);
             this.grpDVDActions.Controls.Add(this.btnDVDActionsModifier);
             this.grpDVDActions.Controls.Add(this.btnDVDActionsAjout);
-            this.grpDVDActions.Location = new System.Drawing.Point(12, 286);
+            this.grpDVDActions.Location = new System.Drawing.Point(7, 288);
             this.grpDVDActions.Name = "grpDVDActions";
             this.grpDVDActions.Size = new System.Drawing.Size(535, 43);
             this.grpDVDActions.TabIndex = 17;
@@ -1450,7 +1450,7 @@ namespace MediaTekDocuments.view
             this.tabRevues.Margin = new System.Windows.Forms.Padding(4);
             this.tabRevues.Name = "tabRevues";
             this.tabRevues.Padding = new System.Windows.Forms.Padding(4);
-            this.tabRevues.Size = new System.Drawing.Size(1169, 814);
+            this.tabRevues.Size = new System.Drawing.Size(1169, 816);
             this.tabRevues.TabIndex = 1;
             this.tabRevues.Text = "Revues";
             this.tabRevues.UseVisualStyleBackColor = true;
@@ -1484,7 +1484,7 @@ namespace MediaTekDocuments.view
             this.grpRevuesInfos.Margin = new System.Windows.Forms.Padding(4);
             this.grpRevuesInfos.Name = "grpRevuesInfos";
             this.grpRevuesInfos.Padding = new System.Windows.Forms.Padding(4);
-            this.grpRevuesInfos.Size = new System.Drawing.Size(1145, 336);
+            this.grpRevuesInfos.Size = new System.Drawing.Size(1145, 343);
             this.grpRevuesInfos.TabIndex = 20;
             this.grpRevuesInfos.TabStop = false;
             this.grpRevuesInfos.Text = "Informations détaillées";
@@ -1492,7 +1492,7 @@ namespace MediaTekDocuments.view
             // cbxActionsRevuesRayons
             // 
             this.cbxActionsRevuesRayons.FormattingEnabled = true;
-            this.cbxActionsRevuesRayons.Location = new System.Drawing.Point(542, 207);
+            this.cbxActionsRevuesRayons.Location = new System.Drawing.Point(542, 209);
             this.cbxActionsRevuesRayons.Name = "cbxActionsRevuesRayons";
             this.cbxActionsRevuesRayons.Size = new System.Drawing.Size(178, 24);
             this.cbxActionsRevuesRayons.TabIndex = 39;
@@ -1501,7 +1501,7 @@ namespace MediaTekDocuments.view
             // cbxActionsRevuesPublics
             // 
             this.cbxActionsRevuesPublics.FormattingEnabled = true;
-            this.cbxActionsRevuesPublics.Location = new System.Drawing.Point(542, 176);
+            this.cbxActionsRevuesPublics.Location = new System.Drawing.Point(542, 178);
             this.cbxActionsRevuesPublics.Name = "cbxActionsRevuesPublics";
             this.cbxActionsRevuesPublics.Size = new System.Drawing.Size(178, 24);
             this.cbxActionsRevuesPublics.TabIndex = 38;
@@ -1510,7 +1510,7 @@ namespace MediaTekDocuments.view
             // cbxActionsRevuesGenres
             // 
             this.cbxActionsRevuesGenres.FormattingEnabled = true;
-            this.cbxActionsRevuesGenres.Location = new System.Drawing.Point(542, 146);
+            this.cbxActionsRevuesGenres.Location = new System.Drawing.Point(542, 148);
             this.cbxActionsRevuesGenres.Name = "cbxActionsRevuesGenres";
             this.cbxActionsRevuesGenres.Size = new System.Drawing.Size(178, 24);
             this.cbxActionsRevuesGenres.TabIndex = 37;
@@ -1521,7 +1521,7 @@ namespace MediaTekDocuments.view
             this.grpRevuesActions.Controls.Add(this.btnRevuesActionsSupprimer);
             this.grpRevuesActions.Controls.Add(this.btnRevuesActionsModifier);
             this.grpRevuesActions.Controls.Add(this.btnRevuesActionsAjout);
-            this.grpRevuesActions.Location = new System.Drawing.Point(11, 271);
+            this.grpRevuesActions.Location = new System.Drawing.Point(7, 278);
             this.grpRevuesActions.Name = "grpRevuesActions";
             this.grpRevuesActions.Size = new System.Drawing.Size(535, 58);
             this.grpRevuesActions.TabIndex = 35;
@@ -1940,7 +1940,7 @@ namespace MediaTekDocuments.view
             this.tabReceptionRevue.Location = new System.Drawing.Point(4, 22);
             this.tabReceptionRevue.Margin = new System.Windows.Forms.Padding(4);
             this.tabReceptionRevue.Name = "tabReceptionRevue";
-            this.tabReceptionRevue.Size = new System.Drawing.Size(1169, 814);
+            this.tabReceptionRevue.Size = new System.Drawing.Size(1169, 816);
             this.tabReceptionRevue.TabIndex = 4;
             this.tabReceptionRevue.Text = "Parutions des revues";
             this.tabReceptionRevue.UseVisualStyleBackColor = true;
@@ -2361,7 +2361,7 @@ namespace MediaTekDocuments.view
             this.tabCommandeLivre.Location = new System.Drawing.Point(4, 22);
             this.tabCommandeLivre.Name = "tabCommandeLivre";
             this.tabCommandeLivre.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCommandeLivre.Size = new System.Drawing.Size(1169, 787);
+            this.tabCommandeLivre.Size = new System.Drawing.Size(1169, 808);
             this.tabCommandeLivre.TabIndex = 5;
             this.tabCommandeLivre.Text = "Commande des livres";
             this.tabCommandeLivre.UseVisualStyleBackColor = true;
@@ -2951,7 +2951,7 @@ namespace MediaTekDocuments.view
             this.tabCommandeDvd.Location = new System.Drawing.Point(4, 22);
             this.tabCommandeDvd.Name = "tabCommandeDvd";
             this.tabCommandeDvd.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCommandeDvd.Size = new System.Drawing.Size(1169, 787);
+            this.tabCommandeDvd.Size = new System.Drawing.Size(1169, 808);
             this.tabCommandeDvd.TabIndex = 6;
             this.tabCommandeDvd.Text = "Commande des dvd";
             this.tabCommandeDvd.UseVisualStyleBackColor = true;
@@ -3542,7 +3542,7 @@ namespace MediaTekDocuments.view
             this.tabCommandeRevues.Location = new System.Drawing.Point(4, 22);
             this.tabCommandeRevues.Name = "tabCommandeRevues";
             this.tabCommandeRevues.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCommandeRevues.Size = new System.Drawing.Size(1169, 787);
+            this.tabCommandeRevues.Size = new System.Drawing.Size(1169, 808);
             this.tabCommandeRevues.TabIndex = 7;
             this.tabCommandeRevues.Text = "Commande des revues";
             this.tabCommandeRevues.UseVisualStyleBackColor = true;
@@ -4081,11 +4081,12 @@ namespace MediaTekDocuments.view
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1177, 840);
+            this.ClientSize = new System.Drawing.Size(1177, 842);
             this.Controls.Add(this.tabOngletsApplication);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmMediatek";
             this.Text = "Gestion des documents de la médiathèque";
+            this.Load += new System.EventHandler(this.FrmMediatek_Load);
             this.tabOngletsApplication.ResumeLayout(false);
             this.tabLivres.ResumeLayout(false);
             this.grpLivresInfos.ResumeLayout(false);
