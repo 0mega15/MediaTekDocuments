@@ -150,7 +150,43 @@ namespace MediaTekDocuments.dal
             List<Abonnement> lesAbonnements = TraitementRecup<Abonnement>(GET, "abonnement/" + jsonIdDocument, null);
             return lesAbonnements;
         }
+        /// <summary>
+        /// Récupère la liste de tous les exemplaires d'un type donné : 0 = Livre / 1 = Revue / 2 = DVD
+        /// </summary>
+        /// <param name="idExemplaire"></param>
+        /// <returns></returns>
+        public List<Exemplaire> GetAllExemplairesType(string idExemplaire)
+        {
+            String jsonIdDocument = convertToJson("id", idExemplaire);
+            List<Exemplaire> lesExemplaires = TraitementRecup<Exemplaire>(GET, "exemplaireglobal/" + jsonIdDocument, null);
+            return lesExemplaires;
+        }
+        /// <summary>
+        /// Récupère la liste de tous les Etats (neuf, usagé, etc.)
+        /// </summary>
+        /// <returns></returns>
+        public List<Etat> GetAllEtats()
+        {
+            List<Etat> lesEtats = TraitementRecup<Etat>(GET, "etat", null);
+            return lesEtats;
+        }
+        public List<Exemplaire> GetAllExemplairesAvecEtat(string type)
+        {
+            List<Exemplaire> lesExemplaires = GetAllExemplairesType(type);
+            List<Etat> lesEtats = GetAllEtats();
 
+            foreach (var exemplaire in lesExemplaires)
+            {
+                Etat etat = lesEtats.Find(e => e.Id == exemplaire.IdEtat);
+                if (etat != null)
+                {
+                    exemplaire.LibelleEtat = etat.Libelle;
+                }
+            }
+
+            return lesExemplaires;
+        }
+        
         public List<InfosExpiration> GetAbonnementExpiration()
         {
             List<InfosExpiration> lesAbonnementExpirations = TraitementRecup<InfosExpiration>(GET, "finAbonnement", null);
@@ -180,6 +216,45 @@ namespace MediaTekDocuments.dal
             try
             {
                 List<Exemplaire> liste = TraitementRecup<Exemplaire>(POST, "exemplaire", "champs=" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Modifie un exemplaire global
+        /// </summary>
+        /// <param name="exemplaire"></param>
+        /// <returns></returns>
+        public bool ModifierExemplaire(Exemplaire exemplaire)
+        {
+            string jsonExemplaire = JsonConvert.SerializeObject(exemplaire, new CustomDateTimeConverter());
+            try
+            {
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(PUT, "exemplaireglobal", "champs=" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        /// <summary>
+        /// Supprime un exemplaire global
+        /// </summary>
+        /// <param name="exemplaire"></param>
+        /// <returns></returns>
+        public bool SupprimerExemplaire(Exemplaire exemplaire)
+        {
+            string jsonExemplaire = JsonConvert.SerializeObject(exemplaire, new CustomDateTimeConverter());
+            try
+            {
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(DELETE, "exemplaireglobal", "champs=" + jsonExemplaire);
                 return (liste != null);
             }
             catch (Exception ex)

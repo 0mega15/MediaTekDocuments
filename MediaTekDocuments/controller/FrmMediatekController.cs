@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MediaTekDocuments.model;
 using MediaTekDocuments.dal;
+using System.Collections.Specialized;
 
 namespace MediaTekDocuments.controller
 {
@@ -39,7 +40,23 @@ namespace MediaTekDocuments.controller
         {
             return access.GetAllLivres();
         }
-
+        /// <summary>
+        /// getter sur la liste des exemplaires en fonction de leur type (0 = livres / 1 = revues / 2 = DVD)
+        /// </summary>
+        /// <returns></returns>
+        public List<Exemplaire> GetAllExemplairesType(string type)
+        {
+            return access.GetAllExemplairesType(type);
+        }
+        /// <summary>
+        /// getter qui va associer chaque exemplaire avec le libellé de son Etat (qui sont dans 2 tables différentes)
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public List<Exemplaire> GetAllExemplairesAvecEtat(string type)
+        {
+            return access.GetAllExemplairesAvecEtat(type);
+        }
         /// <summary>
         /// getter sur la liste des Dvd
         /// </summary>
@@ -109,6 +126,15 @@ namespace MediaTekDocuments.controller
         public bool CreerExemplaire(Exemplaire exemplaire)
         {
             return access.CreerExemplaire(exemplaire);
+        }
+        /// <summary>
+        /// Modifie un exemplaire général dans la bdd
+        /// </summary>
+        /// <param name="exemplaire"></param>
+        /// <returns></returns>
+        public bool ModifierExemplaire(Exemplaire exemplaire)
+        {
+            return access.ModifierExemplaire(exemplaire);
         }
 
         public bool CreerSuivi(Suivi suivi)

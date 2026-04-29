@@ -20,6 +20,7 @@ namespace MediaTekDocuments.view
     {
         #region Commun
         private readonly FrmMediatekController controller;
+
         private readonly BindingSource bdgGenres = new BindingSource();
         private readonly BindingSource bdgPublics = new BindingSource();
         private readonly BindingSource bdgRayons = new BindingSource();
@@ -56,7 +57,10 @@ namespace MediaTekDocuments.view
 
         #region Onglet Livres
         private readonly BindingSource bdgLivresListe = new BindingSource();
+        private readonly BindingSource bdgExemplairesLivresListe = new BindingSource();
+
         private List<Livre> lesLivres = new List<Livre>();
+        private List<Exemplaire> lesExemplairesLivres = new List<Exemplaire>();
 
         /// <summary>
         /// Ouverture de l'onglet Livres : 
@@ -67,9 +71,11 @@ namespace MediaTekDocuments.view
         private void TabLivres_Enter(object sender, EventArgs e)
         {
             lesLivres = controller.GetAllLivres();
+            lesExemplairesLivres = new List<Exemplaire>();
             RemplirComboCategorie(controller.GetAllGenres(), bdgGenres, cbxLivresGenres);
             RemplirComboCategorie(controller.GetAllPublics(), bdgPublics, cbxLivresPublics);
             RemplirComboCategorie(controller.GetAllRayons(), bdgRayons, cbxLivresRayons);
+
             RemplirLivresListeComplete();
         }
 
@@ -267,6 +273,10 @@ namespace MediaTekDocuments.view
                 {
                     Livre livre = (Livre)bdgLivresListe.List[bdgLivresListe.Position];
                     AfficheLivresInfos(livre);
+
+                    /// affiche aussi les exemplaires du livre sélectionné.
+                    lesExemplairesLivres = controller.GetAllExemplairesAvecEtat(livre.Id);
+                    RemplirExemplairesLivresListeComplete();
                 }
                 catch
                 {
@@ -318,11 +328,23 @@ namespace MediaTekDocuments.view
             RemplirLivresListe(lesLivres);
             VideLivresZones();
         }
+        private void RemplirExemplairesLivresListeComplete()
+        {
+            RemplirExemplairesLivresListe(lesExemplairesLivres);
+            VideExemplairesLivresZones();
+        }
 
         /// <summary>
         /// vide les zones de recherche et de filtre
         /// </summary>
         private void VideLivresZones()
+        {
+            Console.WriteLine("A remplir (ligne 336)");
+        }
+        /// <summary>
+        /// vide les zones de recherche et de filtre
+        /// </summary>
+        private void VideExemplairesLivresZones()
         {
             cbxLivresGenres.SelectedIndex = -1;
             cbxLivresRayons.SelectedIndex = -1;
@@ -387,7 +409,7 @@ namespace MediaTekDocuments.view
             {
                 /// Phase 2 : Ajoute les champs remplis à la liste.
                 /// 
-                var request = MessageBox.Show("Souhaitez-vous ajouter ce livre au catalogue ?", 
+                var request = MessageBox.Show("Souhaitez-vous ajouter ce livre au catalogue ?",
                     "Confirmation", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (request == DialogResult.Yes)
                 {
@@ -529,57 +551,57 @@ namespace MediaTekDocuments.view
         private void btnLivresActionsSupprimer_Click(object sender, EventArgs e)
         {
             visibiliteChamps(false, "Supprimer");
-                cbxActionsLivresGenres.Text = txbLivresGenre.Text;
-                cbxActionsLivresPublics.Text = txbLivresPublic.Text;
-                cbxActionsLivresRayons.Text = txbLivresRayon.Text;
+            cbxActionsLivresGenres.Text = txbLivresGenre.Text;
+            cbxActionsLivresPublics.Text = txbLivresPublic.Text;
+            cbxActionsLivresRayons.Text = txbLivresRayon.Text;
 
-                if (dgvLivresListe.SelectedRows.Count == 1)
+            if (dgvLivresListe.SelectedRows.Count == 1)
+            {
+                var request = MessageBox.Show("Souhaitez-vous supprimer le livre suivant : " + txbLivresTitre.Text + " ?",
+                                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (request == DialogResult.Yes)
                 {
-                    var request = MessageBox.Show("Souhaitez-vous supprimer le livre suivant : " + txbLivresTitre.Text + " ?",
-                                    "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (request == DialogResult.Yes)
+                    Genre selectedGenre = (Genre)cbxActionsLivresGenres.SelectedItem;
+                    Public selectedPublic = (Public)cbxActionsLivresPublics.SelectedItem;
+                    Rayon selectedRayon = (Rayon)cbxActionsLivresRayons.SelectedItem;
+
+                    Livre nvLivre = new Livre(
+                        txbLivresNumero.Text,
+                        txbLivresTitre.Text,
+                        txbLivresImage.Text,
+                        txbLivresIsbn.Text,
+                        txbLivresAuteur.Text,
+                        txbLivresCollection.Text,
+                        selectedGenre.Id,
+                        selectedGenre.Libelle,
+                        selectedPublic.Id,
+                        selectedPublic.Libelle,
+                        selectedRayon.Id,
+                        selectedRayon.Libelle
+                        );
+
+                    if (controller.SupprimerLivre(nvLivre) == true)
                     {
-                        Genre selectedGenre = (Genre)cbxActionsLivresGenres.SelectedItem;
-                        Public selectedPublic = (Public)cbxActionsLivresPublics.SelectedItem;
-                        Rayon selectedRayon = (Rayon)cbxActionsLivresRayons.SelectedItem;
+                        visibiliteChamps(true, "Supprimer");
 
-                        Livre nvLivre = new Livre(
-                            txbLivresNumero.Text,
-                            txbLivresTitre.Text,
-                            txbLivresImage.Text,
-                            txbLivresIsbn.Text,
-                            txbLivresAuteur.Text,
-                            txbLivresCollection.Text,
-                            selectedGenre.Id,
-                            selectedGenre.Libelle,
-                            selectedPublic.Id,
-                            selectedPublic.Libelle,
-                            selectedRayon.Id,
-                            selectedRayon.Libelle
-                            );
-
-                        if (controller.SupprimerLivre(nvLivre) == true)
-                        {
-                            visibiliteChamps(true, "Supprimer");
-
-                            MessageBox.Show("Livre supprimé avec succès.");
-                            lesLivres = controller.GetAllLivres();
-                            RemplirLivresListeComplete();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Erreur lors de la suppression.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        MessageBox.Show("Livre supprimé avec succès.");
+                        lesLivres = controller.GetAllLivres();
+                        RemplirLivresListeComplete();
                     }
                     else
                     {
-                        visibiliteChamps(true, "Supprimer");
+                        MessageBox.Show("Erreur lors de la suppression.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Veuillez ne sélectionner qu'une entrée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    visibiliteChamps(true, "Supprimer");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez ne sélectionner qu'une entrée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         /// <summary>
         /// Change la visibilité des champs pour l'ajout, la modification ou la suppression d'un livre.
@@ -605,7 +627,7 @@ namespace MediaTekDocuments.view
                 btnLivresActionsSupprimer.Enabled = result;
 
                 txbLivresAuteur.ReadOnly = result;
-                
+
             }
             else
             {
@@ -614,19 +636,121 @@ namespace MediaTekDocuments.view
                 btnLivresActionsModifier.Enabled = result;
                 btnLivresActionsAjout.Enabled = result;
             }
-                txbLivresCollection.ReadOnly = result;
-                txbLivresTitre.ReadOnly = result;
-                txbLivresImage.ReadOnly = result;
-                txbLivresIsbn.ReadOnly = result;
-                /// genre
-                RemplirComboCategorie(controller.GetAllGenres(), bdgActionsGenres, cbxActionsLivresGenres);
-                cbxActionsLivresGenres.Visible = !result;
-                /// public
-                RemplirComboCategorie(controller.GetAllPublics(), bdgActionsPublics, cbxActionsLivresPublics);
-                cbxActionsLivresPublics.Visible = !result;
-                /// rayon
-                RemplirComboCategorie(controller.GetAllRayons(), bdgActionsRayons, cbxActionsLivresRayons);
-                cbxActionsLivresRayons.Visible = !result;
+            txbLivresCollection.ReadOnly = result;
+            txbLivresTitre.ReadOnly = result;
+            txbLivresImage.ReadOnly = result;
+            txbLivresIsbn.ReadOnly = result;
+            /// genre
+            RemplirComboCategorie(controller.GetAllGenres(), bdgActionsGenres, cbxActionsLivresGenres);
+            cbxActionsLivresGenres.Visible = !result;
+            /// public
+            RemplirComboCategorie(controller.GetAllPublics(), bdgActionsPublics, cbxActionsLivresPublics);
+            cbxActionsLivresPublics.Visible = !result;
+            /// rayon
+            RemplirComboCategorie(controller.GetAllRayons(), bdgActionsRayons, cbxActionsLivresRayons);
+            cbxActionsLivresRayons.Visible = !result;
+        }
+        /// <summary>
+        /// Remplis la liste des exemplaires de livres disponibles dans la base de données.
+        /// </summary>
+        /// <param name="exemplaire"></param>
+        private void RemplirExemplairesLivresListe(List<Exemplaire> exemplaires)
+        {
+            bdgExemplairesLivresListe.DataSource = exemplaires;
+            dgvExemplairesLivresListe.DataSource = bdgExemplairesLivresListe;
+
+
+            dgvExemplairesLivresListe.Columns["id"].Visible = false;
+            dgvExemplairesLivresListe.Columns["idEtat"].Visible = false;
+            dgvExemplairesLivresListe.Columns["photo"].Visible = false;
+            dgvExemplairesLivresListe.Columns["LibelleEtat"].HeaderText = "État";
+
+            dgvExemplairesLivresListe.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+        private void dgvRevuesListe_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvExemplairesLivresListe_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            VideExemplairesLivresZones();
+            string titreColonne = dgvExemplairesLivresListe.Columns[e.ColumnIndex].HeaderText;
+            List<Exemplaire> sortedList = new List<Exemplaire>();
+            switch (titreColonne)
+            {
+                case "Numero":
+                    sortedList = lesExemplairesLivres.OrderBy(o => o.Numero).ToList();
+                    break;
+                case "DateAchat":
+                    sortedList = lesExemplairesLivres.OrderBy(o => o.DateAchat).ToList();
+                    break;
+                case "État":
+                    sortedList = lesExemplairesLivres.OrderBy(o => o.LibelleEtat).ToList();
+                    break;
+            }
+            RemplirExemplairesLivresListe(sortedList);
+        }
+
+        private void dgvExemplairesLivresListe_SelectionChanged(object sender, EventArgs e)
+        {
+            /// voir si ajout nécessaire? Mais je ne crois pas
+        }
+        private void btnExemplaireLivreModifier_Click(object sender, EventArgs e)
+        {
+            /// l'exemplaire sélectionné
+            Exemplaire exemplaireSelected = (Exemplaire)bdgExemplairesLivresListe.List[bdgExemplairesLivresListe.Position];
+            int varEtat = int.Parse(exemplaireSelected.IdEtat); /// la variable état sélectionné
+
+            if (btnExemplaireLivreModifier.Enabled == true)
+            {
+                /// Phase 1
+                cmbExemplaireLivreEtat.Enabled = true;
+
+                cmbExemplaireLivreEtat.Items.Clear();
+                cmbExemplaireLivreEtat.Items.Add("neuf");
+                cmbExemplaireLivreEtat.Items.Add("usagé");
+                cmbExemplaireLivreEtat.Items.Add("détérioré");
+                cmbExemplaireLivreEtat.Items.Add("inutilisable");
+
+                cmbExemplaireLivreEtat.SelectedIndex = varEtat;
+            }
+            else
+            {
+                if (cmbExemplaireLivreEtat.SelectedIndex >= 0)
+                {
+                    Exemplaire nvExemplaire = new Exemplaire(
+                        exemplaireSelected.Numero,
+                        exemplaireSelected.DateAchat,
+                        exemplaireSelected.Photo,
+                        ((Etat)cmbExemplaireLivreEtat.SelectedItem).Id,
+                        ((Etat)cmbExemplaireLivreEtat.SelectedItem).Libelle,
+                        exemplaireSelected.Id
+                    );
+
+                    if (controller.ModifierExemplaire(nvExemplaire) == true)
+                    {
+                        MessageBox.Show("Exemplaire modifié avec succès.");
+                        cmbExemplaireLivreEtat.Enabled = false;
+                        btnExemplaireLivreSupprimer.Enabled = true;
+
+                        lesExemplairesLivres = controller.GetAllExemplairesAvecEtat(exemplaireSelected.Id);
+                        RemplirExemplairesLivresListeComplete();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur lors de la modification.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Veuillez sélectionner un état.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void btnExemplaireLivreSupprimer_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -1749,7 +1873,7 @@ namespace MediaTekDocuments.view
         }
         #endregion
 
-        #region Onglet Paarutions
+        #region Onglet Parutions
         private readonly BindingSource bdgExemplairesListe = new BindingSource();
         private List<Exemplaire> lesExemplaires = new List<Exemplaire>();
         const string ETATNEUF = "00001";
@@ -1925,8 +2049,10 @@ namespace MediaTekDocuments.view
                     DateTime dateAchat = dtpReceptionExemplaireDate.Value;
                     string photo = txbReceptionExemplaireImage.Text;
                     string idEtat = ETATNEUF;
+                    /// solution temporaire : 
+                    string libelleEtat = "neuf";
                     string idDocument = txbReceptionRevueNumero.Text;
-                    Exemplaire exemplaire = new Exemplaire(numero, dateAchat, photo, idEtat, idDocument);
+                    Exemplaire exemplaire = new Exemplaire(numero, dateAchat, photo, idEtat, libelleEtat, idDocument);
                     if (controller.CreerExemplaire(exemplaire))
                     {
                         AfficheReceptionExemplairesRevue();
@@ -3148,7 +3274,6 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("Erreur lors de la suppression");
             }
         }
-
     }
     #endregion
 }
