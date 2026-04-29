@@ -28,7 +28,7 @@ namespace MediaTekDocuments.view
         private readonly BindingSource bdgActionsPublics = new BindingSource();
         private readonly BindingSource bdgActionsRayons = new BindingSource();
 
-        private int LevelId;
+        private readonly int LevelId;
         /// <summary>
         /// Constructeur : création du contrôleur lié à ce formulaire
         /// </summary>
@@ -89,7 +89,7 @@ namespace MediaTekDocuments.view
         /// <param name="lesCategories">liste des objets de type Genre ou Public ou Rayon</param>
         /// <param name="bdg">bindingsource contenant les informations</param>
         /// <param name="cbx">combobox à remplir</param>
-        public void RemplirComboCategorie(List<Categorie> lesCategories, BindingSource bdg, ComboBox cbx)
+        public static void RemplirComboCategorie(List<Categorie> lesCategories, BindingSource bdg, ComboBox cbx)
         {
             bdg.DataSource = lesCategories;
             cbx.DataSource = bdg;
@@ -421,11 +421,11 @@ namespace MediaTekDocuments.view
         /// <param name="e"></param>
         private void btnLivresActionsAjout_Click(object sender, EventArgs e)
         {
-            if (btnLivresActionsModifier.Enabled == true)
+            if (btnLivresActionsModifier.Enabled)
             {
                 /// Phase 1 : Indique au code que l'on souhaite ajouter un élément.
                 /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
-                visibiliteChamps(false, "Ajout");
+                VisibiliteChamps(false, "Ajout");
                 txbLivresNumero.Text = (lesLivres.Count + 1).ToString("D5");
 
             }
@@ -464,9 +464,9 @@ namespace MediaTekDocuments.view
                             selectedRayon.Libelle
                             );
 
-                        if (controller.CreerLivre(nvLivre) == true)
+                        if (controller.CreerLivre(nvLivre))
                         {
-                            visibiliteChamps(true, "Ajout");
+                            VisibiliteChamps(true, "Ajout");
 
                             MessageBox.Show("Livre ajouté avec succès.");
                             lesLivres = controller.GetAllLivres();
@@ -480,7 +480,7 @@ namespace MediaTekDocuments.view
                 }
                 if (request == DialogResult.Cancel)
                 {
-                    visibiliteChamps(true, "Ajout");
+                    VisibiliteChamps(true, "Ajout");
                 }
             }
         }
@@ -492,14 +492,14 @@ namespace MediaTekDocuments.view
         private void btnLivresActionsModifier_Click(object sender, EventArgs e)
         {
             /// sauvegarde les anciennes valeurs dans des variables. 
-            if (btnLivresActionsAjout.Enabled == true)
+            if (btnLivresActionsAjout.Enabled)
             {
 
                 /// Phase 1 : Indique au code que l'on souhaite modifier un élément.
                 /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
                 if (dgvLivresListe.SelectedRows.Count == 1)
                 {
-                    visibiliteChamps(false, "Modifier");
+                    VisibiliteChamps(false, "Modifier");
                     cbxActionsLivresGenres.Text = txbLivresGenre.Text;
                     cbxActionsLivresPublics.Text = txbLivresPublic.Text;
                     cbxActionsLivresRayons.Text = txbLivresRayon.Text;
@@ -546,9 +546,9 @@ namespace MediaTekDocuments.view
                             selectedRayon.Libelle
                             );
 
-                        if (controller.ModifierLivre(nvLivre) == true)
+                        if (controller.ModifierLivre(nvLivre))
                         {
-                            visibiliteChamps(true, "Modifier");
+                            VisibiliteChamps(true, "Modifier");
 
                             MessageBox.Show("Livre modifié avec succès.");
                             lesLivres = controller.GetAllLivres();
@@ -563,7 +563,7 @@ namespace MediaTekDocuments.view
                 }
                 if (request == DialogResult.Cancel)
                 {
-                    visibiliteChamps(true, "Modifier");
+                    VisibiliteChamps(true, "Modifier");
                 }
             }
         }
@@ -574,7 +574,7 @@ namespace MediaTekDocuments.view
         /// <param name="e"></param>
         private void btnLivresActionsSupprimer_Click(object sender, EventArgs e)
         {
-            visibiliteChamps(false, "Supprimer");
+            VisibiliteChamps(false, "Supprimer");
                 cbxActionsLivresGenres.Text = txbLivresGenre.Text;
                 cbxActionsLivresPublics.Text = txbLivresPublic.Text;
                 cbxActionsLivresRayons.Text = txbLivresRayon.Text;
@@ -604,9 +604,9 @@ namespace MediaTekDocuments.view
                             selectedRayon.Libelle
                             );
 
-                        if (controller.SupprimerLivre(nvLivre) == true)
+                        if (controller.SupprimerLivre(nvLivre))
                         {
-                            visibiliteChamps(true, "Supprimer");
+                            VisibiliteChamps(true, "Supprimer");
 
                             MessageBox.Show("Livre supprimé avec succès.");
                             lesLivres = controller.GetAllLivres();
@@ -619,7 +619,7 @@ namespace MediaTekDocuments.view
                     }
                     else
                     {
-                        visibiliteChamps(true, "Supprimer");
+                        VisibiliteChamps(true, "Supprimer");
                     }
                 }
                 else
@@ -631,7 +631,7 @@ namespace MediaTekDocuments.view
         /// Change la visibilité des champs pour l'ajout, la modification ou la suppression d'un livre.
         /// </summary>
         /// <param name="result"></param>
-        private void visibiliteChamps(bool result, string bouton)
+        private void VisibiliteChamps(bool result, string bouton)
         {
             if (bouton == "Ajout")
             {
@@ -954,11 +954,11 @@ namespace MediaTekDocuments.view
         }
         private void btnDVDActionsAjout_Click(object sender, EventArgs e)
         {
-            if (btnDVDActionsModifier.Enabled == true)
+            if (btnDVDActionsModifier.Enabled)
             {
                 /// Phase 1 : Indique au code que l'on souhaite ajouter un élément.
                 /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
-                visibiliteChampsDvd(false, "Ajout");
+                VisibiliteChampsDvd(false, "Ajout");
                 txbDvdNumero.Text = "2" + (lesDvd.Count + 1).ToString("D4");
 
             }
@@ -997,9 +997,9 @@ namespace MediaTekDocuments.view
                             selectedRayon.Libelle
                             );
 
-                        if (controller.CreerDvd(nvDvd) == true)
+                        if (controller.CreerDvd(nvDvd))
                         {
-                            visibiliteChampsDvd(true, "Ajout");
+                            VisibiliteChampsDvd(true, "Ajout");
 
                             MessageBox.Show("Dvd ajouté avec succès.");
                             lesDvd = controller.GetAllDvd();
@@ -1013,7 +1013,7 @@ namespace MediaTekDocuments.view
                 }
                 if (request == DialogResult.Cancel)
                 {
-                    visibiliteChampsDvd(true, "Ajout");
+                    VisibiliteChampsDvd(true, "Ajout");
                 }
             }
         }
@@ -1022,14 +1022,14 @@ namespace MediaTekDocuments.view
         {
 
             /// sauvegarde les anciennes valeurs dans des variables. 
-            if (btnDVDActionsAjout.Enabled == true)
+            if (btnDVDActionsAjout.Enabled)
             {
 
                 /// Phase 1 : Indique au code que l'on souhaite modifier un élément.
                 /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
                 if (dgvDvdListe.SelectedRows.Count == 1)
                 {
-                    visibiliteChampsDvd(false, "Modifier");
+                    VisibiliteChampsDvd(false, "Modifier");
                     cbxActionsDvdGenres.Text = txbDvdGenre.Text;
                     cbxActionsDvdPublics.Text = txbDvdPublic.Text;
                     cbxActionsDvdRayons.Text = txbDvdRayon.Text;
@@ -1076,9 +1076,9 @@ namespace MediaTekDocuments.view
                             selectedRayon.Libelle
                             );
 
-                        if (controller.ModifierDvd(nvDvd) == true)
+                        if (controller.ModifierDvd(nvDvd))
                         {
-                            visibiliteChampsDvd(true, "Modifier");
+                            VisibiliteChampsDvd(true, "Modifier");
 
                             MessageBox.Show("Dvd modifié avec succès.");
                             lesDvd = controller.GetAllDvd();
@@ -1093,14 +1093,14 @@ namespace MediaTekDocuments.view
                 }
                 if (request == DialogResult.Cancel)
                 {
-                    visibiliteChampsDvd(true, "Modifier");
+                    VisibiliteChampsDvd(true, "Modifier");
                 }
             }
         }
 
         private void btnDVDActionsSupprimer_Click(object sender, EventArgs e)
         {
-            visibiliteChampsDvd(false, "Supprimer");
+            VisibiliteChampsDvd(false, "Supprimer");
             cbxActionsDvdGenres.Text = txbDvdGenre.Text;
             cbxActionsDvdPublics.Text = txbDvdPublic.Text;
             cbxActionsDvdRayons.Text = txbDvdRayon.Text;
@@ -1130,9 +1130,9 @@ namespace MediaTekDocuments.view
                         selectedRayon.Libelle
                         );
 
-                    if (controller.SupprimerDvd(nvDvd) == true)
+                    if (controller.SupprimerDvd(nvDvd))
                     {
-                        visibiliteChampsDvd(true, "Supprimer");
+                        VisibiliteChampsDvd(true, "Supprimer");
 
                         MessageBox.Show("Dvd supprimé avec succès.");
                         lesDvd = controller.GetAllDvd();
@@ -1145,7 +1145,7 @@ namespace MediaTekDocuments.view
                 }
                 else
                 {
-                    visibiliteChampsDvd(true, "Supprimer");
+                    VisibiliteChampsDvd(true, "Supprimer");
                 }
             }
             else
@@ -1193,7 +1193,7 @@ namespace MediaTekDocuments.view
         /// Change la visibilité des champs pour l'ajout, la modification ou la suppression d'un DVD.
         /// </summary>
         /// <param name="result"></param>
-        private void visibiliteChampsDvd(bool result, string bouton)
+        private void VisibiliteChampsDvd(bool result, string bouton)
         {
             if (bouton == "Ajout")
             {
@@ -1515,11 +1515,11 @@ namespace MediaTekDocuments.view
 
         private void btnRevuesActionsAjout_Click(object sender, EventArgs e)
         {
-            if (btnRevuesActionsModifier.Enabled == true)
+            if (btnRevuesActionsModifier.Enabled)
             {
                 /// Phase 1 : Indique au code que l'on souhaite ajouter un élément.
                 /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
-                visibiliteChampsRevues(false, "Ajout");
+                VisibiliteChampsRevues(false, "Ajout");
                 txbRevuesNumero.Text = "1" + (lesRevues.Count + 1).ToString("D4");
 
             }
@@ -1557,9 +1557,9 @@ namespace MediaTekDocuments.view
                             int.Parse(txbRevuesDateMiseADispo.Text)
                             );
 
-                        if (controller.CreerRevue(nvRevue) == true)
+                        if (controller.CreerRevue(nvRevue))
                         {
-                            visibiliteChampsRevues(true, "Ajout");
+                            VisibiliteChampsRevues(true, "Ajout");
 
                             MessageBox.Show("Revue ajoutée avec succès.");
                             lesRevues = controller.GetAllRevues();
@@ -1573,7 +1573,7 @@ namespace MediaTekDocuments.view
                 }
                 if (request == DialogResult.Cancel)
                 {
-                    visibiliteChampsRevues(true, "Ajout");
+                    VisibiliteChampsRevues(true, "Ajout");
                 }
             }
         }
@@ -1581,14 +1581,14 @@ namespace MediaTekDocuments.view
         private void btnRevuesActionsModifier_Click(object sender, EventArgs e)
         {
             /// sauvegarde les anciennes valeurs dans des variables. 
-            if (btnRevuesActionsAjout.Enabled == true)
+            if (btnRevuesActionsAjout.Enabled)
             {
 
                 /// Phase 1 : Indique au code que l'on souhaite modifier un élément.
                 /// Prépare le terrain en enablant/disablant tout ce qu'il faut.
                 if (dgvRevuesListe.SelectedRows.Count == 1)
                 {
-                    visibiliteChampsRevues(false, "Modifier");
+                    VisibiliteChampsRevues(false, "Modifier");
                     cbxActionsRevuesGenres.Text = txbRevuesGenre.Text;
                     cbxActionsRevuesPublics.Text = txbRevuesPublic.Text;
                     cbxActionsRevuesRayons.Text = txbRevuesRayon.Text;
@@ -1634,9 +1634,9 @@ namespace MediaTekDocuments.view
                             int.Parse(txbRevuesDateMiseADispo.Text)
                             );
 
-                        if (controller.ModifierRevue(nvRevue) == true)
+                        if (controller.ModifierRevue(nvRevue))
                         {
-                            visibiliteChampsRevues(true, "Modifier");
+                            VisibiliteChampsRevues(true, "Modifier");
 
                             MessageBox.Show("Revue modifiée avec succès.");
                             lesRevues = controller.GetAllRevues();
@@ -1651,14 +1651,14 @@ namespace MediaTekDocuments.view
                 }
                 if (request == DialogResult.Cancel)
                 {
-                    visibiliteChampsRevues(true, "Modifier");
+                    VisibiliteChampsRevues(true, "Modifier");
                 }
             }
         }
 
         private void btnRevuesActionsSupprimer_Click(object sender, EventArgs e)
         {
-            visibiliteChampsRevues(false, "Supprimer");
+            VisibiliteChampsRevues(false, "Supprimer");
             cbxActionsRevuesGenres.Text = txbRevuesGenre.Text;
             cbxActionsRevuesPublics.Text = txbRevuesPublic.Text;
             cbxActionsRevuesRayons.Text = txbRevuesRayon.Text;
@@ -1687,9 +1687,9 @@ namespace MediaTekDocuments.view
                         int.Parse(txbRevuesDateMiseADispo.Text)
                         );
 
-                    if (controller.SupprimerRevue(nvRevue) == true)
+                    if (controller.SupprimerRevue(nvRevue))
                     {
-                        visibiliteChampsRevues(true, "Supprimer");
+                        VisibiliteChampsRevues(true, "Supprimer");
 
                         MessageBox.Show("Revue supprimée avec succès.");
                         lesRevues = controller.GetAllRevues();
@@ -1702,7 +1702,7 @@ namespace MediaTekDocuments.view
                 }
                 else
                 {
-                    visibiliteChampsRevues(true, "Supprimer");
+                    VisibiliteChampsRevues(true, "Supprimer");
                 }
             }
             else
@@ -1751,7 +1751,7 @@ namespace MediaTekDocuments.view
         /// Change la visibilité des champs pour l'ajout, la modification ou la suppression d'un DVD.
         /// </summary>
         /// <param name="result"></param>
-        private void visibiliteChampsRevues(bool result, string bouton)
+        private void VisibiliteChampsRevues(bool result, string bouton)
         {
             if (bouton == "Ajout")
             {
@@ -2306,13 +2306,13 @@ namespace MediaTekDocuments.view
         }
         private void btnAjoutCommande_Click(object sender, EventArgs e)
         {
-            startAction();
+            StartAction();
             cbxEtat.Enabled = false;
             AjoutCommandelivre = true;
         }
         private void btnModifCommande_Click(object sender, EventArgs e)
         {
-            startAction();
+            StartAction();
             cbxEtat.Enabled = true;
             ModifiCommandelivre = true;
             txtNbExemplaire.Text = dgvLivreSuiviCommande.SelectedRows[0].Cells["NbExemplaire"].Value.ToString();
@@ -2330,9 +2330,6 @@ namespace MediaTekDocuments.view
             {
                 return;
             }
-            Livre livre = (Livre)bdgLivresListe.List[bdgLivresListe.Position];
-            DateTime date = DateTime.Now;
-            int idSuivi = Convert.ToInt32(dgvLivreSuiviCommande.SelectedRows[0].Cells["Id"].Value.ToString());
             string idCommande = dgvLivreSuiviCommande.SelectedRows[0].Cells["IdCommande"].Value.ToString();
             if (controller.SupprimerSuivi(idCommande))
             {
@@ -2341,7 +2338,7 @@ namespace MediaTekDocuments.view
         }
         private void btnAnnuler_Click(object sender, EventArgs e)
         {
-            endAction();
+            EndAction();
         }
         private void btnComfirmer_Click(object sender, EventArgs e)
         {
@@ -2357,7 +2354,7 @@ namespace MediaTekDocuments.view
                         if (controller.CreerSuivi(suivi))
                         {
                             RemplirListeCommande(lesCommandeslivre);
-                            endAction();
+                            EndAction();
                         }
                     } catch 
                     {
@@ -2397,7 +2394,7 @@ namespace MediaTekDocuments.view
                         if (controller.ModifiSuivi(suivi))
                         {
                             RemplirListeCommande(lesCommandeslivre);
-                            endAction();
+                            EndAction();
                         }
                     }
                     catch
@@ -2411,7 +2408,7 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("Vous devez remplir toutes les informations", "Information");
             }
         }
-        private void endAction()
+        private void EndAction()
         {
             groupBox1.Enabled = true;
             groupBox2.Visible = true;
@@ -2422,7 +2419,7 @@ namespace MediaTekDocuments.view
             txtMontant.Text = string.Empty;
             txtNbExemplaire.Text = string.Empty;
         }
-        private void startAction()
+        private void StartAction()
         {
             groupBox1.Enabled = false;
             groupBox2.Visible = false;
@@ -2537,7 +2534,7 @@ namespace MediaTekDocuments.view
             txtCommandeDvdRecherche.Text = "";
         }
 
-        private void endActionDvd()
+        private void EndActionDvd()
         {
             groupBox4.Enabled = true;
             groupBox5.Visible = true;
@@ -2549,7 +2546,7 @@ namespace MediaTekDocuments.view
             txtNbExemplaireDvd.Text = string.Empty;
         }
 
-        private void startActionDvd()
+        private void StartActionDvd()
         {
             groupBox4.Enabled = false;
             groupBox5.Visible = false;
@@ -2665,14 +2662,14 @@ namespace MediaTekDocuments.view
 
         private void btnCommandeDvdAjout_Click(object sender, EventArgs e)
         {
-            startActionDvd();
+            StartActionDvd();
             cboEtatDvd.Enabled = false;
             AjoutCommandedvd = true;
         }
 
         private void btnCommandeDvdModifie_Click(object sender, EventArgs e)
         {
-            startActionDvd();
+            StartActionDvd();
             cboEtatDvd.Enabled = true;
             ModifiCommandedvd = true;
             txtNbExemplaireDvd.Text = dgvCommandeDvdSuiviListe.SelectedRows[0].Cells["NbExemplaire"].Value.ToString();
@@ -2691,9 +2688,6 @@ namespace MediaTekDocuments.view
             {
                 return;
             }
-            Dvd dvd = (Dvd)bdgCommandeListeDvd.List[bdgCommandeListeDvd.Position];
-            DateTime date = DateTime.Now;
-            int idSuivi = Convert.ToInt32(dgvCommandeDvdSuiviListe.SelectedRows[0].Cells["Id"].Value.ToString());
             string idCommande = dgvCommandeDvdSuiviListe.SelectedRows[0].Cells["IdCommande"].Value.ToString();
             if (controller.SupprimerSuivi(idCommande))
             {
@@ -2747,7 +2741,7 @@ namespace MediaTekDocuments.view
                         if (controller.CreerSuivi(suivi))
                         {
                             RemplirListeCommandeDvd(lesCommandesdvd);
-                            endActionDvd();
+                            EndActionDvd();
                         }
                     }
                     catch
@@ -2788,7 +2782,7 @@ namespace MediaTekDocuments.view
                         if (controller.ModifiSuivi(suivi))
                         {
                             RemplirListeCommandeDvd(lesCommandesdvd);
-                            endActionDvd();
+                            EndActionDvd();
                         }
                     }
                     catch
@@ -2805,7 +2799,7 @@ namespace MediaTekDocuments.view
 
         private void btnAnnulDvd_Click(object sender, EventArgs e)
         {
-            endActionDvd();
+            EndActionDvd();
         }
         
 
@@ -2855,7 +2849,7 @@ namespace MediaTekDocuments.view
             RemplirComboCategorie(controller.GetAllPublics(), bdgPublics, cboCommandeRevuePublic);
             RemplirComboCategorie(controller.GetAllRayons(), bdgRayons, cboCommandeRevueRayon);
             RemplirCommandeRevuesListeComplete();
-            endActionRevue();
+            EndActionRevue();
         }
         private void RemplirRevuesListeCommandeTab(List<Revue> revues)
         {
@@ -3088,7 +3082,7 @@ namespace MediaTekDocuments.view
                         {
                             lesAbonnements = controller.GetAllAbonnements(idAbonnement);
                             RemplirListeCommandeRevue(lesAbonnements);
-                            endActionRevue();
+                            EndActionRevue();
                         }
                     }
                     catch
@@ -3107,7 +3101,7 @@ namespace MediaTekDocuments.view
                         {
                             lesAbonnements = controller.GetAllAbonnements(idAbonnement);
                             RemplirListeCommandeRevue(lesAbonnements);
-                            endActionRevue();
+                            EndActionRevue();
                         }
                     }
                     catch
@@ -3124,9 +3118,9 @@ namespace MediaTekDocuments.view
 
         private void btnAnnulerCommandeRevue_Click(object sender, EventArgs e)
         {
-            endActionRevue();
+            EndActionRevue();
         }
-        private void endActionRevue()
+        private void EndActionRevue()
         {
             groupBox7.Enabled = true;
             groupBox8.Visible = true;
@@ -3137,7 +3131,7 @@ namespace MediaTekDocuments.view
             textBox1.Text = string.Empty;
         }
 
-        private void startActionRevue()
+        private void StartActionRevue()
         {
             groupBox7.Enabled = false;
             groupBox8.Visible = false;
@@ -3148,7 +3142,7 @@ namespace MediaTekDocuments.view
 
         private void btnModifCommandeRevue_Click(object sender, EventArgs e)
         {
-            startActionRevue();
+            StartActionRevue();
             ModifiCommanderevue = true;
             dateTimePicker1.Value = Convert.ToDateTime(dgvCommandeRevueListe.SelectedRows[0].Cells["DateFinAbonnement"].Value);
             textBox1.Text = dgvCommandeRevueListe.SelectedRows[0].Cells["Montant"].Value.ToString();
@@ -3157,28 +3151,27 @@ namespace MediaTekDocuments.view
 
         private void btnAddCommandeRevue_Click(object sender, EventArgs e)
         {
-            startActionRevue();
+            StartActionRevue();
             dateTimePicker1.Value = DateTime.Now;
             AjoutCommanderevue = true;
         }
 
         private void btnSupprCommandeRevue_Click(object sender, EventArgs e)
         {
-            List<Exemplaire> lesExemplaires = new List<Exemplaire>();
             string idDocuement = dgvCommandeRevueListe.SelectedRows[0].Cells["IdRevue"].Value.ToString();
-            lesExemplaires = controller.GetExemplairesRevue(idDocuement);
+            List<Exemplaire> Exemplaires = controller.GetExemplairesRevue(idDocuement);
             DateTime commande = Convert.ToDateTime(dgvCommandeRevueListe.SelectedRows[0].Cells["DateCommande"].Value);
             DateTime fin_abonnement = Convert.ToDateTime(dgvCommandeRevueListe.SelectedRows[0].Cells["DateFinAbonnement"].Value);
 
             ParutionAbonnement parutionAbonnement = new ParutionAbonnement();
 
-            foreach (Exemplaire ex in lesExemplaires)
+            bool interdit = Exemplaires.Any(ex =>
+            parutionAbonnement.ParutionDansAbonnement(commande, fin_abonnement, ex.DateAchat));
+
+            if (interdit)
             {
-                if (parutionAbonnement.ParutionDansAbonnement(commande, fin_abonnement, ex.DateAchat))
-                {
-                    MessageBox.Show("Suppression impossible");
-                    return;
-                }
+                MessageBox.Show("Suppression impossible");
+                return;
             }
             try
             {
