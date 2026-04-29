@@ -22,7 +22,7 @@ namespace MediaTekDocuments.dal
         /// <summary>
         /// adresse de l'API
         /// </summary>
-        private static readonly string uriApi = "http://localhost/rest_mediatekdocuments/";
+        private static readonly string uriApi = ConfigurationManager.AppSettings["UriApi"];
         /// <summary>
         /// instance unique de la classe
         /// </summary>
@@ -89,7 +89,7 @@ namespace MediaTekDocuments.dal
 
         public List<Connexion> GetConnexion(object data)
         {
-            String jsonData = convertToJson("data", data);
+            String jsonData = ConvertToJson("data", data);
             List<Connexion> connexions = TraitementRecup<Connexion>(GET, "connexion/" + jsonData, null);
             return connexions;
         }
@@ -155,14 +155,14 @@ namespace MediaTekDocuments.dal
 
         public List<Suivi> GetAllSuivis(string idDocument)
         {
-            String jsonIdDocument = convertToJson("id", idDocument);
+            String jsonIdDocument = ConvertToJson("id", idDocument);
             List<Suivi> lessuivis = TraitementRecup<Suivi>(GET, "suivi/" + jsonIdDocument, null);
             return lessuivis;
         }
 
         public List<Abonnement> GetAllAbonnements(string idDocument)
         {
-            String jsonIdDocument = convertToJson("id", idDocument);
+            String jsonIdDocument = ConvertToJson("id", idDocument);
             List<Abonnement> lesAbonnements = TraitementRecup<Abonnement>(GET, "abonnement/" + jsonIdDocument, null);
             return lesAbonnements;
         }
@@ -180,7 +180,7 @@ namespace MediaTekDocuments.dal
         /// <returns>Liste d'objets Exemplaire</returns>
         public List<Exemplaire> GetExemplairesRevue(string idDocument)
         {
-            String jsonIdDocument = convertToJson("id", idDocument);
+            String jsonIdDocument = ConvertToJson("id", idDocument);
             List<Exemplaire> lesExemplaires = TraitementRecup<Exemplaire>(GET, "exemplaire/" + jsonIdDocument, null);
             return lesExemplaires;
         }
@@ -256,7 +256,8 @@ namespace MediaTekDocuments.dal
     {
         try
         {
-            var livreData = new { Id = livre.Id };
+            var Id = livre.Id;
+            var livreData = new { Id };
             string jsonLivre = JsonConvert.SerializeObject(livreData, new CustomDateTimeConverter());
 
             JObject retour = api.RecupDistant(DELETE, "livre", "champs=" + jsonLivre);
@@ -326,7 +327,8 @@ namespace MediaTekDocuments.dal
         {
             try
             {
-                var dvdData = new { Id = dvd.Id };
+                var Id = dvd.Id;
+                var dvdData = new { Id };
                 string jsonDvd = JsonConvert.SerializeObject(dvdData, new CustomDateTimeConverter());
 
                 JObject retour = api.RecupDistant(DELETE, "dvd", "champs=" + jsonDvd);
@@ -398,8 +400,9 @@ namespace MediaTekDocuments.dal
         {
             try
             {
-                var dvdData = new { Id = revue.Id };
-                string jsonrevue = JsonConvert.SerializeObject(dvdData, new CustomDateTimeConverter());
+                var Id = revue.Id;
+                var revueData = new { Id };
+                string jsonrevue = JsonConvert.SerializeObject(revueData, new CustomDateTimeConverter());
 
                 JObject retour = api.RecupDistant(DELETE, "revue", "champs=" + jsonrevue);
 
@@ -453,7 +456,7 @@ namespace MediaTekDocuments.dal
         {
             try
             {
-                String jsonIdSuivi = convertToJson("id", id);
+                String jsonIdSuivi = ConvertToJson("id", id);
                 List<Suivi> liste = TraitementRecup<Suivi>(DELETE, "suivi/"+jsonIdSuivi, null);
                 return (liste != null);
             }
@@ -501,7 +504,7 @@ namespace MediaTekDocuments.dal
         {
             try
             {
-                String jsonIdAbonnement = convertToJson("id", id);
+                String jsonIdAbonnement = ConvertToJson("id", id);
                 List<Abonnement> liste = TraitementRecup<Abonnement>(DELETE, "abonnement/" + jsonIdAbonnement, null);
                 return (liste != null);
             }
@@ -560,10 +563,12 @@ namespace MediaTekDocuments.dal
         /// <param name="nom"></param>
         /// <param name="valeur"></param>
         /// <returns>couple au format json</returns>
-        private String convertToJson(Object nom, Object valeur)
+        private static String ConvertToJson(Object nom, Object valeur)
         {
-            Dictionary<Object, Object> dictionary = new Dictionary<Object, Object>();
-            dictionary.Add(nom, valeur);
+            var dictionary = new Dictionary<object, object>
+            {
+                { nom, valeur }
+            };
             return JsonConvert.SerializeObject(dictionary);
         }
 
