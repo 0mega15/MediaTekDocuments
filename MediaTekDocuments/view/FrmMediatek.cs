@@ -3049,7 +3049,7 @@ namespace MediaTekDocuments.view
                 }
                 catch
                 {
-                    VideDvdCommandeZones(); // à revoir
+                    VideDvdCommandeZones();
                 }
             }
             else
@@ -3069,7 +3069,7 @@ namespace MediaTekDocuments.view
         private void btnComfirmerCommandeRevue_Click(object sender, EventArgs e)
         {
             Revue revue = (Revue)bdgRevuesListe.List[bdgRevuesListe.Position];
-            string idAbonnement = dgvCommandeRevueListe.SelectedRows[0].Cells["IdRevue"].Value.ToString();
+            string idAbonnement = revue.Id;
             DateTime date = DateTime.Now;
             if (textBox1.Text != string.Empty)
             {
