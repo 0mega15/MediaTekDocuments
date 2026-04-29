@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MediaTekDocuments.model;
 
-namespace MediaTekDocumentsTest
+namespace MediaTekDocumentsTest.model
 {
     [TestClass]
     public sealed class FrmMediatekTest
