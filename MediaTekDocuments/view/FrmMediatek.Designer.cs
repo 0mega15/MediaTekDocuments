@@ -32,6 +32,11 @@ namespace MediaTekDocuments.view
             this.tabOngletsApplication = new System.Windows.Forms.TabControl();
             this.tabLivres = new System.Windows.Forms.TabPage();
             this.grpExemplairesLivres = new System.Windows.Forms.GroupBox();
+            this.btnExemplaireLivreModifier = new System.Windows.Forms.Button();
+            this.label113 = new System.Windows.Forms.Label();
+            this.btnExemplaireLivreSupprimer = new System.Windows.Forms.Button();
+            this.label110 = new System.Windows.Forms.Label();
+            this.cmbExemplaireLivreEtat = new System.Windows.Forms.ComboBox();
             this.dgvExemplairesLivresListe = new System.Windows.Forms.DataGridView();
             this.grpLivresInfos = new System.Windows.Forms.GroupBox();
             this.cbxActionsLivresRayons = new System.Windows.Forms.ComboBox();
@@ -350,11 +355,6 @@ namespace MediaTekDocuments.view
             this.label53 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.btnReceptionRechercher = new System.Windows.Forms.Button();
-            this.cmbExemplaireLivreEtat = new System.Windows.Forms.ComboBox();
-            this.label110 = new System.Windows.Forms.Label();
-            this.btnExemplaireLivreSupprimer = new System.Windows.Forms.Button();
-            this.label113 = new System.Windows.Forms.Label();
-            this.btnExemplaireLivreModifier = new System.Windows.Forms.Button();
             this.tabOngletsApplication.SuspendLayout();
             this.tabLivres.SuspendLayout();
             this.grpExemplairesLivres.SuspendLayout();
@@ -421,7 +421,7 @@ namespace MediaTekDocuments.view
             this.tabOngletsApplication.Margin = new System.Windows.Forms.Padding(4);
             this.tabOngletsApplication.Name = "tabOngletsApplication";
             this.tabOngletsApplication.SelectedIndex = 0;
-            this.tabOngletsApplication.Size = new System.Drawing.Size(1177, 1062);
+            this.tabOngletsApplication.Size = new System.Drawing.Size(1177, 993);
             this.tabOngletsApplication.TabIndex = 0;
             // 
             // tabLivres
@@ -432,7 +432,7 @@ namespace MediaTekDocuments.view
             this.tabLivres.Location = new System.Drawing.Point(4, 22);
             this.tabLivres.Margin = new System.Windows.Forms.Padding(4);
             this.tabLivres.Name = "tabLivres";
-            this.tabLivres.Size = new System.Drawing.Size(1169, 1036);
+            this.tabLivres.Size = new System.Drawing.Size(1169, 967);
             this.tabLivres.TabIndex = 2;
             this.tabLivres.Text = "Livres";
             this.tabLivres.UseVisualStyleBackColor = true;
@@ -448,10 +448,57 @@ namespace MediaTekDocuments.view
             this.grpExemplairesLivres.Controls.Add(this.dgvExemplairesLivresListe);
             this.grpExemplairesLivres.Location = new System.Drawing.Point(8, 811);
             this.grpExemplairesLivres.Name = "grpExemplairesLivres";
-            this.grpExemplairesLivres.Size = new System.Drawing.Size(1145, 217);
+            this.grpExemplairesLivres.Size = new System.Drawing.Size(1145, 149);
             this.grpExemplairesLivres.TabIndex = 22;
             this.grpExemplairesLivres.TabStop = false;
             this.grpExemplairesLivres.Text = "Exemplaires";
+            // 
+            // btnExemplaireLivreModifier
+            // 
+            this.btnExemplaireLivreModifier.Location = new System.Drawing.Point(499, 70);
+            this.btnExemplaireLivreModifier.Name = "btnExemplaireLivreModifier";
+            this.btnExemplaireLivreModifier.Size = new System.Drawing.Size(167, 37);
+            this.btnExemplaireLivreModifier.TabIndex = 36;
+            this.btnExemplaireLivreModifier.Text = "Modifier";
+            this.btnExemplaireLivreModifier.UseVisualStyleBackColor = true;
+            this.btnExemplaireLivreModifier.Click += new System.EventHandler(this.btnExemplaireLivreModifier_Click);
+            // 
+            // label113
+            // 
+            this.label113.AutoSize = true;
+            this.label113.Location = new System.Drawing.Point(496, 21);
+            this.label113.Name = "label113";
+            this.label113.Size = new System.Drawing.Size(180, 16);
+            this.label113.TabIndex = 35;
+            this.label113.Text = "Modification de l\'exemplaire :";
+            // 
+            // btnExemplaireLivreSupprimer
+            // 
+            this.btnExemplaireLivreSupprimer.Location = new System.Drawing.Point(672, 70);
+            this.btnExemplaireLivreSupprimer.Name = "btnExemplaireLivreSupprimer";
+            this.btnExemplaireLivreSupprimer.Size = new System.Drawing.Size(167, 37);
+            this.btnExemplaireLivreSupprimer.TabIndex = 35;
+            this.btnExemplaireLivreSupprimer.Text = "Supprimer";
+            this.btnExemplaireLivreSupprimer.UseVisualStyleBackColor = true;
+            this.btnExemplaireLivreSupprimer.Click += new System.EventHandler(this.btnExemplaireLivreSupprimer_Click);
+            // 
+            // label110
+            // 
+            this.label110.AutoSize = true;
+            this.label110.Location = new System.Drawing.Point(497, 44);
+            this.label110.Name = "label110";
+            this.label110.Size = new System.Drawing.Size(36, 16);
+            this.label110.TabIndex = 35;
+            this.label110.Text = "État :";
+            // 
+            // cmbExemplaireLivreEtat
+            // 
+            this.cmbExemplaireLivreEtat.Enabled = false;
+            this.cmbExemplaireLivreEtat.FormattingEnabled = true;
+            this.cmbExemplaireLivreEtat.Location = new System.Drawing.Point(548, 40);
+            this.cmbExemplaireLivreEtat.Name = "cmbExemplaireLivreEtat";
+            this.cmbExemplaireLivreEtat.Size = new System.Drawing.Size(291, 24);
+            this.cmbExemplaireLivreEtat.TabIndex = 35;
             // 
             // dgvExemplairesLivresListe
             // 
@@ -467,7 +514,7 @@ namespace MediaTekDocuments.view
             this.dgvExemplairesLivresListe.RowTemplate.Height = 24;
             this.dgvExemplairesLivresListe.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvExemplairesLivresListe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvExemplairesLivresListe.Size = new System.Drawing.Size(802, 190);
+            this.dgvExemplairesLivresListe.Size = new System.Drawing.Size(478, 114);
             this.dgvExemplairesLivresListe.TabIndex = 0;
             this.dgvExemplairesLivresListe.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvExemplairesLivresListe_ColumnHeaderMouseClick);
             this.dgvExemplairesLivresListe.SelectionChanged += new System.EventHandler(this.dgvExemplairesLivresListe_SelectionChanged);
@@ -4122,58 +4169,11 @@ namespace MediaTekDocuments.view
             this.btnReceptionRechercher.UseVisualStyleBackColor = true;
             this.btnReceptionRechercher.Click += new System.EventHandler(this.btnReceptionRechercher_Click);
             // 
-            // cmbExemplaireLivreEtat
-            // 
-            this.cmbExemplaireLivreEtat.Enabled = false;
-            this.cmbExemplaireLivreEtat.FormattingEnabled = true;
-            this.cmbExemplaireLivreEtat.Location = new System.Drawing.Point(877, 67);
-            this.cmbExemplaireLivreEtat.Name = "cmbExemplaireLivreEtat";
-            this.cmbExemplaireLivreEtat.Size = new System.Drawing.Size(249, 24);
-            this.cmbExemplaireLivreEtat.TabIndex = 35;
-            // 
-            // label110
-            // 
-            this.label110.AutoSize = true;
-            this.label110.Location = new System.Drawing.Point(826, 71);
-            this.label110.Name = "label110";
-            this.label110.Size = new System.Drawing.Size(36, 16);
-            this.label110.TabIndex = 35;
-            this.label110.Text = "État :";
-            // 
-            // btnExemplaireLivreSupprimer
-            // 
-            this.btnExemplaireLivreSupprimer.Location = new System.Drawing.Point(875, 155);
-            this.btnExemplaireLivreSupprimer.Name = "btnExemplaireLivreSupprimer";
-            this.btnExemplaireLivreSupprimer.Size = new System.Drawing.Size(251, 37);
-            this.btnExemplaireLivreSupprimer.TabIndex = 35;
-            this.btnExemplaireLivreSupprimer.Text = "Supprimer";
-            this.btnExemplaireLivreSupprimer.UseVisualStyleBackColor = true;
-            this.btnExemplaireLivreSupprimer.Click += new System.EventHandler(this.btnExemplaireLivreSupprimer_Click);
-            // 
-            // label113
-            // 
-            this.label113.AutoSize = true;
-            this.label113.Location = new System.Drawing.Point(820, 27);
-            this.label113.Name = "label113";
-            this.label113.Size = new System.Drawing.Size(180, 16);
-            this.label113.TabIndex = 35;
-            this.label113.Text = "Modification de l\'exemplaire :";
-            // 
-            // btnExemplaireLivreModifier
-            // 
-            this.btnExemplaireLivreModifier.Location = new System.Drawing.Point(875, 106);
-            this.btnExemplaireLivreModifier.Name = "btnExemplaireLivreModifier";
-            this.btnExemplaireLivreModifier.Size = new System.Drawing.Size(251, 37);
-            this.btnExemplaireLivreModifier.TabIndex = 36;
-            this.btnExemplaireLivreModifier.Text = "Modifier";
-            this.btnExemplaireLivreModifier.UseVisualStyleBackColor = true;
-            this.btnExemplaireLivreModifier.Click += new System.EventHandler(this.btnExemplaireLivreModifier_Click);
-            // 
             // FrmMediatek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1177, 1062);
+            this.ClientSize = new System.Drawing.Size(1177, 993);
             this.Controls.Add(this.tabOngletsApplication);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmMediatek";
