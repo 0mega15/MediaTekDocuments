@@ -11,16 +11,14 @@ namespace MediaTekDocuments.model
         public string Photo { get; set; }
         public DateTime DateAchat { get; set; }
         public string IdEtat { get; set; }
-        public string LibelleEtat { get; set; }
         public string Id { get; set; }
 
-        public Exemplaire(int numero, DateTime dateAchat, string photo, string idEtat, string libelleEtat, string idDocument)
+        public Exemplaire(int numero, DateTime dateAchat, string photo, string idEtat, string idDocument)
         {
             this.Numero = numero;
             this.DateAchat = dateAchat;
             this.Photo = photo;
             this.IdEtat = idEtat;
-            this.LibelleEtat = libelleEtat;
             this.Id = idDocument;
         }
 

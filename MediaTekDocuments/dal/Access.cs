@@ -170,22 +170,6 @@ namespace MediaTekDocuments.dal
             List<Etat> lesEtats = TraitementRecup<Etat>(GET, "etat", null);
             return lesEtats;
         }
-        public List<Exemplaire> GetAllExemplairesAvecEtat(string type)
-        {
-            List<Exemplaire> lesExemplaires = GetAllExemplairesType(type);
-            List<Etat> lesEtats = GetAllEtats();
-
-            foreach (var exemplaire in lesExemplaires)
-            {
-                Etat etat = lesEtats.Find(e => e.Id == exemplaire.IdEtat);
-                if (etat != null)
-                {
-                    exemplaire.LibelleEtat = etat.Libelle;
-                }
-            }
-
-            return lesExemplaires;
-        }
         
         public List<InfosExpiration> GetAbonnementExpiration()
         {

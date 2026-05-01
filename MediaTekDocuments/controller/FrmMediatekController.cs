@@ -49,15 +49,6 @@ namespace MediaTekDocuments.controller
             return access.GetAllExemplairesType(type);
         }
         /// <summary>
-        /// getter qui va associer chaque exemplaire avec le libellé de son Etat (qui sont dans 2 tables différentes)
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public List<Exemplaire> GetAllExemplairesAvecEtat(string type)
-        {
-            return access.GetAllExemplairesAvecEtat(type);
-        }
-        /// <summary>
         /// getter sur la liste des Dvd
         /// </summary>
         /// <returns>Liste d'objets dvd</returns>
@@ -128,6 +119,14 @@ namespace MediaTekDocuments.controller
             return access.CreerExemplaire(exemplaire);
         }
         /// <summary>
+        /// Récupère tous les états
+        /// </summary>
+        /// <returns></returns>
+        public List<Etat> GetAllEtats()
+        {
+            return access.GetAllEtats();
+        }
+        /// <summary>
         /// Modifie un exemplaire général dans la bdd
         /// </summary>
         /// <param name="exemplaire"></param>
@@ -135,6 +134,15 @@ namespace MediaTekDocuments.controller
         public bool ModifierExemplaire(Exemplaire exemplaire)
         {
             return access.ModifierExemplaire(exemplaire);
+        }
+        /// <summary>
+        /// Supprime un exemplaire général dans la bdd
+        /// </summary>
+        /// <param name="exemplaire"></param>
+        /// <returns></returns>
+        public bool SupprimerExemplaire(Exemplaire exemplaire)
+        {
+            return access.SupprimerExemplaire(exemplaire);
         }
 
         public bool CreerSuivi(Suivi suivi)

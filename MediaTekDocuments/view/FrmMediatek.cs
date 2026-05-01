@@ -275,7 +275,7 @@ namespace MediaTekDocuments.view
                     AfficheLivresInfos(livre);
 
                     /// affiche aussi les exemplaires du livre sélectionné.
-                    lesExemplairesLivres = controller.GetAllExemplairesAvecEtat(livre.Id);
+                    lesExemplairesLivres = controller.GetAllExemplairesType(livre.Id);
                     RemplirExemplairesLivresListeComplete();
                 }
                 catch
@@ -656,14 +656,41 @@ namespace MediaTekDocuments.view
         /// <param name="exemplaire"></param>
         private void RemplirExemplairesLivresListe(List<Exemplaire> exemplaires)
         {
+            List<Etat> lesEtats = controller.GetAllEtats();
+
             bdgExemplairesLivresListe.DataSource = exemplaires;
             dgvExemplairesLivresListe.DataSource = bdgExemplairesLivresListe;
 
-
             dgvExemplairesLivresListe.Columns["id"].Visible = false;
-            dgvExemplairesLivresListe.Columns["idEtat"].Visible = false;
             dgvExemplairesLivresListe.Columns["photo"].Visible = false;
-            dgvExemplairesLivresListe.Columns["LibelleEtat"].HeaderText = "État";
+            dgvExemplairesLivresListe.Columns["IdEtat"].Visible = false;
+
+            if (dgvExemplairesLivresListe.Columns["LibelleEtat"] != null)
+            {
+                dgvExemplairesLivresListe.Columns.Remove("LibelleEtat");
+            }
+
+            DataGridViewTextBoxColumn etatColumn = new DataGridViewTextBoxColumn();
+            etatColumn.HeaderText = "État";
+            etatColumn.Name = "LibelleEtat";
+            etatColumn.DataPropertyName = "IdEtat";
+            dgvExemplairesLivresListe.Columns.Add(etatColumn);
+
+            foreach (DataGridViewRow row in dgvExemplairesLivresListe.Rows)
+            {
+                if (row.DataBoundItem is Exemplaire exemplaire)
+                {
+                    Etat etat = lesEtats.FirstOrDefault(e => e.Id == exemplaire.IdEtat);
+                    if (etat != null)
+                    {
+                        row.Cells["LibelleEtat"].Value = etat.Libelle;
+                    }
+                    else
+                    {
+                        row.Cells["LibelleEtat"].Value = "Inconnu";
+                    }
+                }
+            }
 
             dgvExemplairesLivresListe.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
@@ -686,7 +713,7 @@ namespace MediaTekDocuments.view
                     sortedList = lesExemplairesLivres.OrderBy(o => o.DateAchat).ToList();
                     break;
                 case "État":
-                    sortedList = lesExemplairesLivres.OrderBy(o => o.LibelleEtat).ToList();
+                    sortedList = lesExemplairesLivres.OrderBy(o => o.IdEtat).ToList();
                     break;
             }
             RemplirExemplairesLivresListe(sortedList);
@@ -700,41 +727,42 @@ namespace MediaTekDocuments.view
         {
             /// l'exemplaire sélectionné
             Exemplaire exemplaireSelected = (Exemplaire)bdgExemplairesLivresListe.List[bdgExemplairesLivresListe.Position];
-            int varEtat = int.Parse(exemplaireSelected.IdEtat); /// la variable état sélectionné
 
-            if (btnExemplaireLivreModifier.Enabled == true)
+            if (btnExemplaireLivreSupprimer.Enabled == true)
             {
                 /// Phase 1
                 cmbExemplaireLivreEtat.Enabled = true;
+                btnExemplaireLivreSupprimer.Enabled = false;
 
-                cmbExemplaireLivreEtat.Items.Clear();
-                cmbExemplaireLivreEtat.Items.Add("neuf");
-                cmbExemplaireLivreEtat.Items.Add("usagé");
-                cmbExemplaireLivreEtat.Items.Add("détérioré");
-                cmbExemplaireLivreEtat.Items.Add("inutilisable");
+                List<Etat> lesEtats = controller.GetAllEtats();
 
-                cmbExemplaireLivreEtat.SelectedIndex = varEtat;
+                cmbExemplaireLivreEtat.DataSource = lesEtats;
+                cmbExemplaireLivreEtat.DisplayMember = "Libelle";
+                cmbExemplaireLivreEtat.ValueMember = "Id";
+
+                cmbExemplaireLivreEtat.SelectedIndex = 0;
             }
             else
             {
                 if (cmbExemplaireLivreEtat.SelectedIndex >= 0)
                 {
+                    Etat selectedEtat = (Etat)cmbExemplaireLivreEtat.SelectedItem;
+
                     Exemplaire nvExemplaire = new Exemplaire(
                         exemplaireSelected.Numero,
                         exemplaireSelected.DateAchat,
                         exemplaireSelected.Photo,
-                        ((Etat)cmbExemplaireLivreEtat.SelectedItem).Id,
-                        ((Etat)cmbExemplaireLivreEtat.SelectedItem).Libelle,
+                        selectedEtat.Id,
                         exemplaireSelected.Id
                     );
 
                     if (controller.ModifierExemplaire(nvExemplaire) == true)
-                    {
+                    {   
                         MessageBox.Show("Exemplaire modifié avec succès.");
                         cmbExemplaireLivreEtat.Enabled = false;
                         btnExemplaireLivreSupprimer.Enabled = true;
 
-                        lesExemplairesLivres = controller.GetAllExemplairesAvecEtat(exemplaireSelected.Id);
+                        lesExemplairesLivres = controller.GetAllExemplairesType(exemplaireSelected.Id);
                         RemplirExemplairesLivresListeComplete();
                     }
                     else
@@ -750,7 +778,47 @@ namespace MediaTekDocuments.view
         }
         private void btnExemplaireLivreSupprimer_Click(object sender, EventArgs e)
         {
+            if (dgvExemplairesLivresListe.SelectedRows.Count == 1)
+            {
+                Exemplaire exemplaireSelected = (Exemplaire)bdgExemplairesLivresListe.List[bdgExemplairesLivresListe.Position];
 
+                var request = MessageBox.Show("Souhaitez-vous supprimer l'exemplaire n°" + exemplaireSelected.Numero.ToString() + " ?",
+                                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (request == DialogResult.Yes)
+                {
+                    btnExemplaireLivreModifier.Enabled = false;
+                    btnExemplaireLivreSupprimer.Enabled = false;
+
+                    Exemplaire nvExemplaire = new Exemplaire(
+                        exemplaireSelected.Numero,
+                        exemplaireSelected.DateAchat,
+                        exemplaireSelected.Photo,
+                        exemplaireSelected.IdEtat,
+                        exemplaireSelected.Id
+                    );
+
+                    if (controller.SupprimerExemplaire(nvExemplaire) == true)
+                    {
+                        btnExemplaireLivreModifier.Enabled = true;
+                        btnExemplaireLivreSupprimer.Enabled = true;
+                        MessageBox.Show("Exemplaire supprimé avec succès.");
+                        lesExemplaires = controller.GetAllExemplairesType("0");
+                        RemplirExemplairesLivresListeComplete();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur lors de la suppression.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    visibiliteChamps(true, "Supprimer");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez ne sélectionner qu'une entrée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
 
@@ -2052,7 +2120,7 @@ namespace MediaTekDocuments.view
                     /// solution temporaire : 
                     string libelleEtat = "neuf";
                     string idDocument = txbReceptionRevueNumero.Text;
-                    Exemplaire exemplaire = new Exemplaire(numero, dateAchat, photo, idEtat, libelleEtat, idDocument);
+                    Exemplaire exemplaire = new Exemplaire(numero, dateAchat, photo, idEtat, idDocument);
                     if (controller.CreerExemplaire(exemplaire))
                     {
                         AfficheReceptionExemplairesRevue();
