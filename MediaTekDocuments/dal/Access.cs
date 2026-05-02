@@ -219,7 +219,7 @@ namespace MediaTekDocuments.dal
             string jsonExemplaire = JsonConvert.SerializeObject(exemplaire, new CustomDateTimeConverter());
             try
             {
-                List<Exemplaire> liste = TraitementRecup<Exemplaire>(PUT, "exemplaireglobal", "champs=" + jsonExemplaire);
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(PUT, "exemplaireglobal", "id=null&champs=" + jsonExemplaire);
                 return (liste != null);
             }
             catch (Exception ex)
