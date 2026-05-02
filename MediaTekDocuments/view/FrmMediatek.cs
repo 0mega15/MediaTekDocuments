@@ -630,7 +630,7 @@ namespace MediaTekDocuments.view
                 }
                 else
                 {
-                    visibiliteChamps(true, "Supprimer");
+                    VisibiliteChamps(true, "Supprimer");
                 }
             }
             else
@@ -729,10 +729,6 @@ namespace MediaTekDocuments.view
 
             dgvExemplairesLivresListe.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
-        private void dgvRevuesListe_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void dgvExemplairesLivresListe_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -754,16 +750,12 @@ namespace MediaTekDocuments.view
             RemplirExemplairesLivresListeComplete();
         }
 
-        private void dgvExemplairesLivresListe_SelectionChanged(object sender, EventArgs e)
-        {
-            /// voir si ajout nécessaire? Mais je ne crois pas
-        }
         private void btnExemplaireLivreModifier_Click(object sender, EventArgs e)
         {
             /// l'exemplaire sélectionné
             Exemplaire exemplaireSelected = (Exemplaire)bdgExemplairesLivresListe.List[bdgExemplairesLivresListe.Position];
 
-            if (btnExemplaireLivreSupprimer.Enabled == true)
+            if (btnExemplaireLivreSupprimer.Enabled )
             {
                 /// Phase 1
                 cmbExemplaireLivreEtat.Enabled = true;
@@ -791,7 +783,7 @@ namespace MediaTekDocuments.view
                         exemplaireSelected.Id
                     );
 
-                    if (controller.ModifierExemplaire(nvExemplaire) == true)
+                    if (controller.ModifierExemplaire(nvExemplaire))
                     {
                         MessageBox.Show("Exemplaire modifié avec succès.");
                         cmbExemplaireLivreEtat.Enabled = false;
@@ -832,7 +824,7 @@ namespace MediaTekDocuments.view
                         exemplaireSelected.Id
                     );
 
-                    if (controller.SupprimerExemplaire(nvExemplaire) == true)
+                    if (controller.SupprimerExemplaire(nvExemplaire))
                     {
                         btnExemplaireLivreModifier.Enabled = true;
                         btnExemplaireLivreSupprimer.Enabled = true;
@@ -847,7 +839,7 @@ namespace MediaTekDocuments.view
                 }
                 else
                 {
-                    visibiliteChamps(true, "Supprimer");
+                    VisibiliteChamps(true, "Supprimer");
                 }
             }
             else
@@ -1490,7 +1482,7 @@ namespace MediaTekDocuments.view
             /// l'exemplaire sélectionné
             Exemplaire exemplaireSelected = (Exemplaire)bdgExemplairesDVDListe.List[bdgExemplairesDVDListe.Position];
 
-            if (btnExemplaireDVDSupprimer.Enabled == true)
+            if (btnExemplaireDVDSupprimer.Enabled)
             {
                 /// Phase 1
                 cmbExemplaireDVDEtat.Enabled = true;
@@ -1518,7 +1510,7 @@ namespace MediaTekDocuments.view
                         exemplaireSelected.Id
                     );
 
-                    if (controller.ModifierExemplaire(nvExemplaire) == true)
+                    if (controller.ModifierExemplaire(nvExemplaire))
                     {
                         MessageBox.Show("Exemplaire modifié avec succès.");
                         cmbExemplaireDVDEtat.Enabled = false;
@@ -1559,7 +1551,7 @@ namespace MediaTekDocuments.view
                         exemplaireSelected.Id
                     );
 
-                    if (controller.SupprimerExemplaire(nvExemplaire) == true)
+                    if (controller.SupprimerExemplaire(nvExemplaire))
                     {
                         btnExemplaireDVDModifier.Enabled = true;
                         btnExemplaireDVDSupprimer.Enabled = true;
@@ -1574,7 +1566,7 @@ namespace MediaTekDocuments.view
                 }
                 else
                 {
-                    visibiliteChamps(true, "Supprimer");
+                    VisibiliteChamps(true, "Supprimer");
                 }
             }
             else
@@ -2166,7 +2158,6 @@ namespace MediaTekDocuments.view
         private List<Exemplaire> lesExemplaires = new List<Exemplaire>();
         const string ETATNEUF = "00001";
 
-        private readonly BindingSource bdgExemplairesRevueListe = new BindingSource();
         private List<Exemplaire> lesExemplairesRevue = new List<Exemplaire>();
 
 
@@ -2371,8 +2362,6 @@ namespace MediaTekDocuments.view
                     DateTime dateAchat = dtpReceptionExemplaireDate.Value;
                     string photo = txbReceptionExemplaireImage.Text;
                     string idEtat = ETATNEUF;
-                    /// solution temporaire : 
-                    string libelleEtat = "neuf";
                     string idDocument = txbReceptionRevueNumero.Text;
                     Exemplaire exemplaire = new Exemplaire(numero, dateAchat, photo, idEtat, idDocument);
                     if (controller.CreerExemplaire(exemplaire))
@@ -2454,7 +2443,7 @@ namespace MediaTekDocuments.view
             {
                 Exemplaire exemplaireSelected = (Exemplaire)bdgExemplairesListe.List[bdgExemplairesListe.Position];
 
-                if (cmbExemplaireRevueEtat.Enabled == false)
+                if (cmbExemplaireRevueEtat.Enabled)
                 {
                     /// Phase 1
                     cmbExemplaireRevueEtat.Enabled = true;
@@ -2481,7 +2470,7 @@ namespace MediaTekDocuments.view
                             exemplaireSelected.Id
                         );
 
-                        if (controller.ModifierExemplaire(nvExemplaire) == true)
+                        if (controller.ModifierExemplaire(nvExemplaire))
                         {
                             MessageBox.Show("Exemplaire modifié avec succès.");
                             cmbExemplaireRevueEtat.Enabled = false;

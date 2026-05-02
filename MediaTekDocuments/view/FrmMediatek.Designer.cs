@@ -529,7 +529,6 @@ namespace MediaTekDocuments.view
             this.dgvExemplairesLivresListe.Size = new System.Drawing.Size(478, 114);
             this.dgvExemplairesLivresListe.TabIndex = 0;
             this.dgvExemplairesLivresListe.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvExemplairesLivresListe_ColumnHeaderMouseClick);
-            this.dgvExemplairesLivresListe.SelectionChanged += new System.EventHandler(this.dgvExemplairesLivresListe_SelectionChanged);
             // 
             // grpLivresInfos
             // 
@@ -2094,7 +2093,6 @@ namespace MediaTekDocuments.view
             this.dgvRevuesListe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRevuesListe.Size = new System.Drawing.Size(1125, 246);
             this.dgvRevuesListe.TabIndex = 4;
-            this.dgvRevuesListe.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRevuesListe_CellContentClick);
             this.dgvRevuesListe.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRevuesListe_ColumnHeaderMouseClick);
             this.dgvRevuesListe.SelectionChanged += new System.EventHandler(this.dgvRevuesListe_SelectionChanged);
             // 
