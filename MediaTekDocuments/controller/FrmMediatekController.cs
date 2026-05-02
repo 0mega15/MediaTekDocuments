@@ -94,17 +94,28 @@ namespace MediaTekDocuments.controller
         {
             return access.GetExemplairesRevue(idDocuement);
         }
-
+        /// <summary>
+        /// récupère les suivis d'une revue
+        /// </summary>
+        /// <param name="idDocument"></param>
+        /// <returns></returns>
         public List<Suivi> GetAllSuivis(string idDocument)
         {
             return access.GetAllSuivis(idDocument);
         }
-
+        /// <summary>
+        /// récupère les abonnements d'une revue
+        /// </summary>
+        /// <param name="idDocument"></param>
+        /// <returns></returns>
         public List<Abonnement> GetAllAbonnements(string idDocument)
         {
             return access.GetAllAbonnements(idDocument);
         }
-
+        /// <summary>
+        /// récupère les revues dont les abonnements expirent dans les 30 prochains jours
+        /// </summary>
+        /// <returns></returns>
         public List<InfosExpiration> GetAbonnementExpiration()
         {
             return access.GetAbonnementExpiration();
@@ -144,30 +155,58 @@ namespace MediaTekDocuments.controller
         {
             return access.SupprimerExemplaire(exemplaire);
         }
-
+        /// <summary>
+        /// Crée un suivi d'une revue dans la bdd
+        /// </summary>
+        /// <param name="suivi"></param>
+        /// <returns></returns>
         public bool CreerSuivi(Suivi suivi)
         {
             return access.CreerSuivi(suivi);
         }
+        /// <summary>
+        /// Modifie un suivi d'une revue dans la bdd
+        /// </summary>
+        /// <param name="suivi"></param>
+        /// <returns></returns>
 
         public bool ModifiSuivi(Suivi suivi)
         {
             return access.ModifiSuivi(suivi);
         }
+        /// <summary>
+        /// Supprime un suivi d'une revue dans la bdd
+        /// </summary>
+        /// <param name="suivi"></param>
+        /// <returns></returns>
 
         public bool SupprimerSuivi(string suivi)
         {
             return access.SupprimerSuivi(suivi);
         }
-
+        /// <summary>
+        /// Crée un abonnement d'une revue dans la bdd
+        /// </summary>
+        /// <param name="abonnement"></param>
+        /// <returns></returns>
         public bool CreerAbonnement(Abonnement abonnement)
         {
             return access.CreerAbonnement(abonnement);
         }
-         public bool ModifiAbonnement(Abonnement abonnement)
+        /// <summary>
+        /// Modifie un abonnement d'une revue dans la bdd
+        /// </summary>
+        /// <param name="abonnement"></param>
+        /// <returns></returns>
+        public bool ModifiAbonnement(Abonnement abonnement)
         {
             return access.ModifiAbonnement(abonnement);
         }
+        /// <summary>
+        /// Supprime un abonnement d'une revue dans la bdd
+        /// </summary>
+        /// <param name="abonnement"></param>
+        /// <returns></returns>
 
         public bool SupprimerAbonnement(string abonnement)
         {

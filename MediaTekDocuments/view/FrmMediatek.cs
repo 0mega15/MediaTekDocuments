@@ -685,6 +685,7 @@ namespace MediaTekDocuments.view
             RemplirComboCategorie(controller.GetAllRayons(), bdgActionsRayons, cbxActionsLivresRayons);
             cbxActionsLivresRayons.Visible = !result;
         }
+
         /// <summary>
         /// Remplis la liste des exemplaires de livres disponibles dans la base de données.
         /// </summary>
@@ -749,7 +750,11 @@ namespace MediaTekDocuments.view
             RemplirExemplairesLivresListe(sortedList);
             RemplirExemplairesLivresListeComplete();
         }
-
+        /// <summary>
+        /// Gère l'appui sur le bouton de modification d'un exemplaire de livre : affiche les champs modifiables, puis modifie l'exemplaire sélectionné et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExemplaireLivreModifier_Click(object sender, EventArgs e)
         {
             /// l'exemplaire sélectionné
@@ -803,6 +808,11 @@ namespace MediaTekDocuments.view
                 }
             }
         }
+        /// <summary>
+        /// Gère l'appui sur le bouton de suppression d'un exemplaire de livre : affiche une confirmation, puis supprime l'exemplaire sélectionné et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExemplaireLivreSupprimer_Click(object sender, EventArgs e)
         {
             if (dgvExemplairesLivresListe.SelectedRows.Count == 1)
@@ -1131,6 +1141,11 @@ namespace MediaTekDocuments.view
             txbDvdNumRecherche.Text = "";
             txbDvdTitreRecherche.Text = "";
         }
+        /// <summary>
+        /// Gère l'appui sur le bouton d'ajout d'un dvd : affiche les champs modifiables, puis ajoute le dvd à la liste et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDVDActionsAjout_Click(object sender, EventArgs e)
         {
             if (btnDVDActionsModifier.Enabled)
@@ -1196,7 +1211,11 @@ namespace MediaTekDocuments.view
                 }
             }
         }
-
+        /// <summary>
+        /// Gère l'appui sur le bouton de modification d'un dvd : affiche les champs modifiables, puis modifie le dvd sélectionné et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDVDActionsModifier_Click(object sender, EventArgs e)
         {
 
@@ -1276,7 +1295,11 @@ namespace MediaTekDocuments.view
                 }
             }
         }
-
+        /// <summary>
+        /// Gère l'appui sur le bouton de suppression d'un dvd : affiche une confirmation, puis supprime le dvd sélectionné et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDVDActionsSupprimer_Click(object sender, EventArgs e)
         {
             VisibiliteChampsDvd(false, "Supprimer");
@@ -1416,7 +1439,9 @@ namespace MediaTekDocuments.view
             RemplirComboCategorie(controller.GetAllRayons(), bdgActionsRayons, cbxActionsDvdRayons);
             cbxActionsDvdRayons.Visible = !result;
         }
-
+        /// <summary>
+        /// Réaffiche la liste complète des DVD
+        /// </summary>
         private void RemplirExemplairesDVDListeComplete()
         {
             if (dgvDvdListe.CurrentCell != null)
@@ -1477,6 +1502,11 @@ namespace MediaTekDocuments.view
 
             dgvExemplairesDVDListe.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
+        /// <summary>
+        /// Gère l'appui sur le bouton de modification d'un exemplaire de DVD : affiche les champs modifiables, puis modifie l'exemplaire sélectionné et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExemplaireDVDModifier_Click(object sender, EventArgs e)
         {
             /// l'exemplaire sélectionné
@@ -1530,6 +1560,11 @@ namespace MediaTekDocuments.view
                 }
             }
         }
+        /// <summary>
+        /// gère l'appui sur le bouton de suppression d'un exemplaire de DVD : affiche une confirmation, puis supprime l'exemplaire sélectionné et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExemplaireDVDSupprimer_Click(object sender, EventArgs e)
         {
             if (dgvExemplairesDVDListe.SelectedRows.Count == 1)
@@ -1574,7 +1609,11 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("Veuillez ne sélectionner qu'une entrée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// gère le tri sur les colonnes du datagrid des exemplaires de DVD.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvExemplairesDVDListe_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             string titreColonne = dgvExemplairesDVDListe.Columns[e.ColumnIndex].HeaderText;
@@ -1870,7 +1909,11 @@ namespace MediaTekDocuments.view
             txbRevuesNumRecherche.Text = "";
             txbRevuesTitreRecherche.Text = "";
         }
-
+        /// <summary>
+        /// Gère l'appui sur le bouton d'ajout d'une revue : affiche les champs modifiables, puis ajoute la revue créée avec les champs remplis et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRevuesActionsAjout_Click(object sender, EventArgs e)
         {
             if (btnRevuesActionsModifier.Enabled)
@@ -1935,7 +1978,11 @@ namespace MediaTekDocuments.view
                 }
             }
         }
-
+        /// <summary>
+        /// Gère l'appui sur le bouton de modification d'une revue : affiche les champs modifiables, puis modifie la revue sélectionnée avec les champs remplis et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRevuesActionsModifier_Click(object sender, EventArgs e)
         {
             /// sauvegarde les anciennes valeurs dans des variables. 
@@ -2013,7 +2060,11 @@ namespace MediaTekDocuments.view
                 }
             }
         }
-
+        /// <summary>
+        /// gère l'appui sur le bouton de suppression d'une revue : affiche une confirmation, puis supprime la revue sélectionnée et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRevuesActionsSupprimer_Click(object sender, EventArgs e)
         {
             VisibiliteChampsRevues(false, "Supprimer");
@@ -2435,7 +2486,11 @@ namespace MediaTekDocuments.view
                 pcbReceptionExemplaireRevueImage.Image = null;
             }
         }
-
+        /// <summary>
+        /// gère l'appui sur le bouton de modification d'un exemplaire : affiche les champs modifiables, puis modifie l'exemplaire sélectionné avec les champs remplis et rafraîchit la liste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExemplaireRevueModifier_Click(object sender, EventArgs e)
         {
             /// l'exemplaire sélectionné
@@ -2503,6 +2558,11 @@ namespace MediaTekDocuments.view
         private List<Suivi> lesCommandeslivre = new List<Suivi>();
         private bool AjoutCommandelivre = false;
         private bool ModifiCommandelivre = false;
+        /// <summary>
+        /// Lors de l'ouverture de l'onglet, récupère les livres, les genres, les publics et les rayons, affiche la liste complète des livres et prépare les champs pour l'ajout ou la modification d'une commande de livre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabCommandeLivre_Enter(object sender, EventArgs e)
         {
             lesLivres = controller.GetAllLivres();
@@ -2525,6 +2585,10 @@ namespace MediaTekDocuments.view
             cbxEtat.SelectedIndex = 0;
 
         }
+        /// <summary>
+        /// S'occupe de remplir le datagrid des livres avec la liste reçue en paramètre, et d'en masquer certaines colonnes pour n'afficher que les informations pertinentes.
+        /// </summary>
+        /// <param name="livres"></param>
         private void RemplirLivresListeCommande(List<Livre> livres)
         {
             bdgLivresListe.DataSource = livres;
@@ -2538,7 +2602,10 @@ namespace MediaTekDocuments.view
             dgvCommandeLivresListe.Columns["id"].DisplayIndex = 0;
             dgvCommandeLivresListe.Columns["titre"].DisplayIndex = 1;
         }
-
+        /// <summary>
+        /// Permet de remplir le datagrid des commandes de livre avec la liste reçue en paramètre, et d'en masquer certaines colonnes pour n'afficher que les informations pertinentes.
+        /// </summary>
+        /// <param name="commandes"></param>
         private void RemplirListeCommande(List<Suivi> commandes)
         {
             bdgCommandeListe.DataSource = commandes;
@@ -2548,6 +2615,11 @@ namespace MediaTekDocuments.view
             dgvLivreSuiviCommande.Columns["id"].Visible = true;
             dgvLivreSuiviCommande.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
+        /// <summary>
+        /// Gère l'appui sur le bouton de recherche d'un livre par son numéro : affiche les informations du livre recherché, ou un message d'erreur si le numéro est introuvable, et réaffiche la liste complète des livres si la zone de saisie est vide.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeLivresNumRecherche_Click(object sender, EventArgs e)
         {
             if (!txbCommandeLivresNumRecherche.Text.Equals(""))
@@ -2573,6 +2645,11 @@ namespace MediaTekDocuments.view
                 RemplirLivresListeCommandeComplete();
             }
         }
+        /// <summary>
+        /// Lors de la modification du texte dans la zone de recherche par titre, affiche les livres dont le titre contient le texte saisi, ou un message d'erreur si aucun livre ne correspond, et réaffiche la liste complète des livres si la zone de saisie est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txbCommandeLivresTitreRecherche_TextChanged(object sender, EventArgs e)
         {
             if (!txbCommandeLivresTitreRecherche.Text.Equals(""))
@@ -2595,6 +2672,10 @@ namespace MediaTekDocuments.view
                 }
             }
         }
+        /// <summary>
+        /// S'occupe de remplir les zones d'informations du livre sélectionné avec les informations du livre passé en paramètre, et d'afficher l'image du livre si le chemin est correct, ou de laisser la zone d'image vide si le chemin est incorrect.
+        /// </summary>
+        /// <param name="livre"></param>
         private void AfficheCommandeLivresInfos(Livre livre)
         {
             txbCommandeLivresAuteur.Text = livre.Auteur;
@@ -2616,6 +2697,9 @@ namespace MediaTekDocuments.view
                 pcbCommandeLivresImage.Image = null;
             }
         }
+        /// <summary>
+        /// S'occupe de vider les zones d'informations du livre sélectionné, ainsi que la zone d'image, lorsque aucune sélection n'est faite dans la liste des livres.
+        /// </summary>
         private void VideLivresCommandeInfos()
         {
             txbCommandeLivresAuteur.Text = "";
@@ -2629,12 +2713,20 @@ namespace MediaTekDocuments.view
             txbCommandeLivresTitre.Text = "";
             pcbCommandeLivresImage.Image = null;
         }
+        /// <summary>
+        /// S'occupe de réafficher la liste complète des livres, de réafficher la liste des commandes du livre sélectionné, et de vider les zones de recherche et de sélection des critères de recherche, lorsque l'on souhaite annuler les filtres appliqués à la liste des livres.
+        /// </summary>
         private void RemplirLivresListeCommandeComplete()
         {
             RemplirLivresListeCommande(lesLivres);
             RemplirListeCommande(lesCommandeslivre);
             VideLivresCommandeZones();
         }
+        /// <summary>
+        /// Lors de la sélection d'un genre dans le combo de sélection des genres, affiche les livres dont le genre correspond au genre sélectionné, ou un message d'erreur si aucun livre ne correspond, et réaffiche la liste complète des livres si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbxCommandeLivresGenres_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxCommandeLivresGenres.SelectedIndex >= 0)
@@ -2648,6 +2740,11 @@ namespace MediaTekDocuments.view
                 cbxCommandeLivresPublics.SelectedIndex = -1;
             }
         }
+        /// <summary>
+        /// Lors de la sélection d'un public dans le combo de sélection des publics, affiche les livres dont le public correspond au public sélectionné, ou un message d'erreur si aucun livre ne correspond, et réaffiche la liste complète des livres si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbxCommandeLivresPublics_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxCommandeLivresPublics.SelectedIndex >= 0)
@@ -2661,6 +2758,11 @@ namespace MediaTekDocuments.view
                 cbxCommandeLivresGenres.SelectedIndex = -1;
             }
         }
+        /// <summary>
+        /// Lors de la sélection d'un rayon dans le combo de sélection des rayons, affiche les livres dont le rayon correspond au rayon sélectionné, ou un message d'erreur si aucun livre ne correspond, et réaffiche la liste complète des livres si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbxCommandeLivresRayons_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxCommandeLivresRayons.SelectedIndex >= 0)
@@ -2674,6 +2776,11 @@ namespace MediaTekDocuments.view
                 cbxCommandeLivresPublics.SelectedIndex = -1;
             }
         }
+        /// <summary>
+        /// Lors de la sélection d'un livre dans la liste des livres, affiche les informations du livre sélectionné, affiche la liste des commandes du livre sélectionné, et active ou désactive les boutons de modification et de suppression d'une commande en fonction de l'existence ou non de commandes pour le livre sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvCommandeLivresListe_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvCommandeLivresListe.CurrentCell != null)
@@ -2705,18 +2812,36 @@ namespace MediaTekDocuments.view
                 VideLivresCommandeInfos();
             }
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation des filtres Public appliqués à la liste des livres, appelle la fonction RemplirLivresListeCommandeComplete.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeLivresAnnulPublics_Click(object sender, EventArgs e)
         {
             RemplirLivresListeCommandeComplete();
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation des filtres Rayons appliqués à la liste des livres, appelle la fonction RemplirLivresListeCommandeComplete.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeLivresAnnulRayons_Click(object sender, EventArgs e)
         {
             RemplirLivresListeCommandeComplete();
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation des filtres Genres appliqués à la liste des livres, appelle la fonction RemplirLivresListeCommandeComplete.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeLivresAnnulGenres_Click(object sender, EventArgs e)
         {
             RemplirLivresListeCommandeComplete();
         }
+        /// <summary>
+        /// Permet de vider les zones de recherche et de sélection des critères de recherche, lorsque l'on souhaite annuler les filtres appliqués à la liste des livres, sans réafficher la liste complète des livres ni la liste des commandes du livre sélectionné.
+        /// </summary>
         private void VideLivresCommandeZones()
         {
             cbxCommandeLivresGenres.SelectedIndex = -1;
@@ -2725,6 +2850,11 @@ namespace MediaTekDocuments.view
             txbCommandeLivresNumRecherche.Text = "";
             txbCommandeLivresTitreRecherche.Text = "";
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton de tri sur une colonne, trie la liste des livres en fonction de la colonne sélectionnée, réaffiche la liste des livres triée, et vide les zones d'informations du livre sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvCommandeLivresListe_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             VideLivresZones();
@@ -2756,12 +2886,22 @@ namespace MediaTekDocuments.view
             }
             RemplirLivresListeCommande(sortedList);
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'ajout d'une commande de livre, affiche les champs modifiables pour la création d'une commande, et prépare la variable de contrôle AjoutCommandelivre pour la création d'une commande lors de l'appui sur le bouton de confirmation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAjoutCommande_Click(object sender, EventArgs e)
         {
             StartAction();
             cbxEtat.Enabled = false;
             AjoutCommandelivre = true;
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton de modification d'une commande de livre, affiche les champs modifiables pour la modification d'une commande, remplit les champs avec les informations de la commande sélectionnée, et prépare la variable de contrôle ModifiCommandelivre pour la modification d'une commande lors de l'appui sur le bouton de confirmation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnModifCommande_Click(object sender, EventArgs e)
         {
             StartAction();
@@ -2771,6 +2911,11 @@ namespace MediaTekDocuments.view
             txtMontant.Text = dgvLivreSuiviCommande.SelectedRows[0].Cells["Montant"].Value.ToString();
             cbxEtat.SelectedItem = dgvLivreSuiviCommande.SelectedRows[0].Cells["Etat"].Value.ToString();
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton de suppression d'une commande de livre, vérifie que la commande sélectionnée n'est pas livrée, demande une confirmation pour la suppression, supprime la commande sélectionnée et rafraîchit la liste des commandes du livre sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSupprCommande_Click(object sender, EventArgs e)
         {
             if (dgvLivreSuiviCommande.SelectedRows[0].Cells["Etat"].Value.ToString() == "livrée")
@@ -2788,10 +2933,20 @@ namespace MediaTekDocuments.view
                 RemplirListeCommande(lesCommandeslivre);
             }
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation de l'ajout ou de la modification d'une commande de livre, Appelle la fonction EndAction pour réafficher les éléments graphiques de base, vider les champs modifiables et préparer les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAnnuler_Click(object sender, EventArgs e)
         {
             EndAction();
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton de confirmation de l'ajout ou de la modification d'une commande de livre, vérifie que les champs obligatoires sont remplis, crée un objet Suivi avec les informations saisies et les informations du livre sélectionné, ajoute ou modifie la commande en fonction de l'action en cours, rafraîchit la liste des commandes du livre sélectionné, et appelle la fonction EndAction pour réafficher les éléments graphiques de base, vider les champs modifiables et préparer les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande. Affiche également des messages d'erreur en cas de champs non remplis ou de points dans les champs numériques.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnComfirmer_Click(object sender, EventArgs e)
         {
             Livre livre = (Livre)bdgLivresListe.List[bdgLivresListe.Position];
@@ -2861,6 +3016,9 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("Vous devez remplir toutes les informations", "Information");
             }
         }
+        /// <summary>
+        /// Permet de réafficher les éléments graphiques de base, de vider les champs modifiables et de préparer les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande.
+        /// </summary>
         private void EndAction()
         {
             groupBox1.Enabled = true;
@@ -2872,6 +3030,9 @@ namespace MediaTekDocuments.view
             txtMontant.Text = string.Empty;
             txtNbExemplaire.Text = string.Empty;
         }
+        /// <summary>
+        /// Permet d'afficher les champs modifiables pour la création ou la modification d'une commande de livre.
+        /// </summary>
         private void StartAction()
         {
             groupBox1.Enabled = false;
@@ -2888,6 +3049,11 @@ namespace MediaTekDocuments.view
         private bool AjoutCommandedvd = false;
         private bool ModifiCommandedvd = false;
 
+        /// <summary>
+        /// Lors de l'ouverture de l'onglet, récupère les dvd, les genres, les publics et les rayons, affiche la liste complète des dvd et prépare les champs pour l'ajout ou la modification d'une commande de dvd.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabCommandeDvd_Enter(object sender, EventArgs e)
         {
             lesDvd = controller.GetAllDvd();
@@ -2910,7 +3076,10 @@ namespace MediaTekDocuments.view
             cboEtatDvd.SelectedIndex = 0;
 
         }
-
+        /// <summary>
+        /// Permet de remplir le datagrid des dvd avec la liste reçue en paramètre, et d'en masquer certaines colonnes pour n'afficher que les informations pertinentes.
+        /// </summary>
+        /// <param name="dvd"></param>
         private void RemplirDvdListeCommande(List<Dvd> dvd)
         {
             bdgCommandeListeDvd.DataSource = dvd;
@@ -2924,7 +3093,10 @@ namespace MediaTekDocuments.view
             dgvCommandeDvdListe.Columns["id"].DisplayIndex = 0;
             dgvCommandeDvdListe.Columns["titre"].DisplayIndex = 1;
         }
-
+        /// <summary>
+        /// Permet de remplir le datagrid des commandes de dvd avec la liste reçue en paramètre, et d'en masquer certaines colonnes pour n'afficher que les informations pertinentes.
+        /// </summary>
+        /// <param name="commandes"></param>
         private void RemplirListeCommandeDvd(List<Suivi> commandes)
         {
             bdgCommandeListe.DataSource = commandes;
@@ -2934,7 +3106,10 @@ namespace MediaTekDocuments.view
             dgvCommandeDvdSuiviListe.Columns["id"].Visible = true;
             dgvCommandeDvdSuiviListe.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
-
+        /// <summary>
+        /// Permet de s'occuper de remplir les zones d'informations du dvd sélectionné avec les informations du dvd passé en paramètre, et d'afficher l'image du dvd si le chemin est correct, ou de laisser la zone d'image vide si le chemin est incorrect.
+        /// </summary>
+        /// <param name="dvd"></param>
         private void AfficheCommandeDvdInfos(Dvd dvd)
         {
             txtCommandeDvdRealisateur.Text = dvd.Realisateur;
@@ -2956,7 +3131,9 @@ namespace MediaTekDocuments.view
                 pictureBoxCommandeDvd.Image = null;
             }
         }
-
+        /// <summary>
+        /// Permet de vider les zones d'informations du dvd sélectionné, ainsi que la zone d'image, lorsque aucune sélection n'est faite dans la liste des dvd.
+        /// </summary>
         private void VideDvdCommandeInfos()
         {
             txtCommandeDvdRealisateur.Text = "";
@@ -2970,13 +3147,18 @@ namespace MediaTekDocuments.view
             txtCommandeDvdTitre.Text = "";
             pictureBoxCommandeDvd.Image = null;
         }
-
+        /// <summary>
+        /// Permet de réafficher la liste complète des dvd, de réafficher la liste des commandes du dvd sélectionné, et de vider les zones de recherche et de sélection des critères de recherche, lorsque l'on souhaite annuler les filtres appliqués à la liste des dvd.
+        /// </summary>
         private void RemplirDvdListeCommandeComplete()
         {
             RemplirDvdListeCommande(lesDvd);
             RemplirListeCommandeDvd(lesCommandesdvd);
             VideDvdCommandeZones();
         }
+        /// <summary>
+        /// Permet de vider les zones de recherche et de sélection des critères de recherche, lorsque l'on souhaite annuler les filtres appliqués à la liste des dvd, sans réafficher la liste complète des dvd ni la liste des commandes du dvd sélectionné.
+        /// </summary>
 
         private void VideDvdCommandeZones()
         {
@@ -2986,7 +3168,9 @@ namespace MediaTekDocuments.view
             txtCommandeNumDvdRecherche.Text = "";
             txtCommandeDvdRecherche.Text = "";
         }
-
+        /// <summary>
+        /// Permet de réafficher les éléments graphiques de base, de vider les champs modifiables et de préparer les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande.
+        /// </summary>
         private void EndActionDvd()
         {
             groupBox4.Enabled = true;
@@ -2998,7 +3182,9 @@ namespace MediaTekDocuments.view
             txtMontantDvd.Text = string.Empty;
             txtNbExemplaireDvd.Text = string.Empty;
         }
-
+        /// <summary>
+        /// Permet d'afficher les champs modifiables pour la création ou la modification d'une commande de dvd.
+        /// </summary>
         private void StartActionDvd()
         {
             groupBox4.Enabled = false;
@@ -3007,6 +3193,11 @@ namespace MediaTekDocuments.view
             groupBox6.Visible = true;
             groupBox6.Enabled = true;
         }
+        /// <summary>
+        /// Lors de la modification du texte dans la zone de recherche par titre, affiche les dvd dont le titre contient le texte saisi, ou un message d'erreur si aucun dvd ne correspond, et réaffiche la liste complète des dvd si la zone de saisie est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtCommandeDvdRecherche_TextChanged(object sender, EventArgs e)
         {
             if (!txtCommandeDvdRecherche.Text.Equals(""))
@@ -3029,7 +3220,11 @@ namespace MediaTekDocuments.view
                 }
             }
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton de recherche par numéro, affiche le dvd dont le numéro correspond au numéro saisi, ou un message d'erreur si aucun dvd ne correspond, et réaffiche la liste complète des dvd si la zone de saisie du numéro est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeDvdNumRecherche_Click(object sender, EventArgs e)
         {
             if (!txtCommandeNumDvdRecherche.Text.Equals(""))
@@ -3055,7 +3250,11 @@ namespace MediaTekDocuments.view
                 RemplirDvdListeCommandeComplete();
             }
         }
-
+        /// <summary>
+        /// Lors de la sélection d'un genre dans le combo de sélection des genres, affiche les dvd dont le genre correspond au genre sélectionné, ou un message d'erreur si aucun dvd ne correspond, et réaffiche la liste complète des dvd si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbxCommandeDvdGenres_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxCommandeDvdGenres.SelectedIndex >= 0)
@@ -3070,6 +3269,11 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Lors de la sélection d'un public dans le combo de sélection des publics, affiche les dvd dont le public correspond au public sélectionné, ou un message d'erreur si aucun dvd ne correspond, et réaffiche la liste complète des dvd si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbxCommandeDvdPublic_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxCommandeDvdPublic.SelectedIndex >= 0)
@@ -3083,7 +3287,11 @@ namespace MediaTekDocuments.view
                 cbxCommandeDvdGenres.SelectedIndex = -1;
             }
         }
-
+        /// <summary>
+        /// Lors de la sélection d'un rayon dans le combo de sélection des rayons, affiche les dvd dont le rayon correspond au rayon sélectionné, ou un message d'erreur si aucun dvd ne correspond, et réaffiche la liste complète des dvd si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbxCommandeDvdRayon_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxCommandeDvdRayon.SelectedIndex >= 0)
@@ -3097,29 +3305,50 @@ namespace MediaTekDocuments.view
                 cbxCommandeDvdPublic.SelectedIndex = -1;
             }
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation des filtres Genres appliqués à la liste des dvd, appelle la fonction RemplirDvdListeCommandeComplete.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeDvdAnnulGenre_Click(object sender, EventArgs e)
         {
             RemplirDvdListeCommandeComplete();
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation des filtres Public appliqués à la liste des dvd, appelle la fonction RemplirDvdListeCommandeComplete.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnCommandeDvdAnnulPublic_Click(object sender, EventArgs e)
         {
             RemplirDvdListeCommandeComplete();
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation des filtres Rayons appliqués à la liste des dvd, appelle la fonction RemplirDvdListeCommandeComplete.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeDvdAnnulRayon_Click(object sender, EventArgs e)
         {
             RemplirDvdListeCommandeComplete();
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'ajout d'une commande de dvd, affiche les champs modifiables pour la création d'une commande, et prépare la variable de contrôle AjoutCommandedvd pour la création d'une commande lors de l'appui sur le bouton de confirmation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeDvdAjout_Click(object sender, EventArgs e)
         {
             StartActionDvd();
             cboEtatDvd.Enabled = false;
             AjoutCommandedvd = true;
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton de modification d'une commande de dvd, affiche les champs modifiables pour la modification d'une commande, remplit les champs avec les informations de la commande sélectionnée, et prépare la variable de contrôle ModifiCommandedvd pour la modification d'une commande lors de l'appui sur le bouton de confirmation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeDvdModifie_Click(object sender, EventArgs e)
         {
             StartActionDvd();
@@ -3129,7 +3358,11 @@ namespace MediaTekDocuments.view
             txtMontantDvd.Text = dgvCommandeDvdSuiviListe.SelectedRows[0].Cells["Montant"].Value.ToString();
             cboEtatDvd.SelectedItem = dgvCommandeDvdSuiviListe.SelectedRows[0].Cells["Etat"].Value.ToString();
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton de suppression d'une commande de dvd, vérifie que la commande sélectionnée n'est pas livrée, demande une confirmation pour la suppression, supprime la commande sélectionnée et rafraîchit la liste des commandes du dvd sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeDvdSupprimer_Click(object sender, EventArgs e)
         {
             if (dgvCommandeDvdSuiviListe.SelectedRows[0].Cells["Etat"].Value.ToString() == "livrée")
@@ -3147,7 +3380,11 @@ namespace MediaTekDocuments.view
                 RemplirListeCommandeDvd(lesCommandesdvd);
             }
         }
-
+        /// <summary>
+        /// Lors de la sélection d'un dvd dans la liste des dvd, affiche les informations du dvd sélectionné, récupère les commandes associées au dvd sélectionné, affiche la liste des commandes du dvd sélectionné, et active ou désactive les boutons de modification et de suppression en fonction de l'existence de commandes pour le dvd sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvCommandeDvdListe_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvCommandeDvdListe.CurrentCell != null)
@@ -3179,7 +3416,11 @@ namespace MediaTekDocuments.view
                 VideDvdCommandeInfos();
             }
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton de confirmation de l'ajout ou de la modification d'une commande de dvd, vérifie que les champs obligatoires sont remplis, crée un objet Suivi avec les informations saisies et les informations du dvd sélectionné, ajoute ou modifie la commande en fonction de l'action en cours, rafraîchit la liste des commandes du dvd sélectionné, et appelle la fonction EndActionDvd pour réafficher les éléments graphiques de base, vider les champs modifiables et préparer les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande. Affiche également des messages d'erreur en cas de champs non remplis ou de points dans les champs numériques.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnComfirmDvd_Click(object sender, EventArgs e)
         {
             Dvd dvd = (Dvd)bdgCommandeListeDvd.List[bdgCommandeListeDvd.Position];
@@ -3249,12 +3490,20 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("Vous devez remplir toutes les informations", "Information");
             }
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation de l'ajout ou de la modification d'une commande de dvd, Appelle la fonction EndActionDvd pour réafficher les éléments graphiques de base, vider les champs modifiables et préparer les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAnnulDvd_Click(object sender, EventArgs e)
         {
             EndActionDvd();
         }
-
+        /// <summary>
+        /// Lors de l'appui sur un en-tête de colonne dans la liste des dvd, trie la liste des dvd en fonction de la colonne sélectionnée, et réaffiche la liste des dvd triée. Les colonnes triables sont : Id, Titre, Durée, Réalisateur, Genre, Public et Rayon.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void dgvCommandeDvdListe_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -3295,6 +3544,11 @@ namespace MediaTekDocuments.view
         private List<Abonnement> lesAbonnements = new List<Abonnement>();
         private bool AjoutCommanderevue = false;
         private bool ModifiCommanderevue = false;
+        /// <summary>
+        /// Lors de l'ouverture de l'onglet, récupère les revues, les genres, les publics et les rayons, affiche la liste complète des revues et prépare les champs pour l'ajout ou la modification d'une commande de revue.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabCommandeRevue_Enter(object sender, EventArgs e)
         {
             lesRevues = controller.GetAllRevues();
@@ -3304,6 +3558,10 @@ namespace MediaTekDocuments.view
             RemplirCommandeRevuesListeComplete();
             EndActionRevue();
         }
+        /// <summary>
+        /// Permet de remplir le datagrid des revues avec la liste reçue en paramètre, et d'en masquer certaines colonnes pour n'afficher que les informations pertinentes.
+        /// </summary>
+        /// <param name="revues"></param>
         private void RemplirRevuesListeCommandeTab(List<Revue> revues)
         {
             bdgRevuesListe.DataSource = revues;
@@ -3316,6 +3574,10 @@ namespace MediaTekDocuments.view
             dgvRevueListeTabCommande.Columns["id"].DisplayIndex = 0;
             dgvRevueListeTabCommande.Columns["titre"].DisplayIndex = 1;
         }
+        /// <summary>
+        /// Permet de remplir le datagrid des commandes de revue avec la liste reçue en paramètre, et d'en masquer certaines colonnes pour n'afficher que les informations pertinentes.
+        /// </summary>
+        /// <param name="abonnements"></param>
 
         private void RemplirListeCommandeRevue(List<Abonnement> abonnements)
         {
@@ -3324,7 +3586,10 @@ namespace MediaTekDocuments.view
 
             dgvCommandeRevueListe.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
-
+        /// <summary>
+        /// Permet de s'occuper de remplir les zones d'informations de la revue sélectionnée avec les informations de la revue passée en paramètre, et d'afficher l'image de la revue si le chemin est correct, ou de laisser la zone d'image vide si le chemin est incorrect.
+        /// </summary>
+        /// <param name="revue"></param>
         private void AfficheCommandeRevuesInfos(Revue revue)
         {
             txbCommandeRevuePeriodicite.Text = revue.Periodicite;
@@ -3345,6 +3610,9 @@ namespace MediaTekDocuments.view
                 pcbCommandeRevueImage.Image = null;
             }
         }
+        /// <summary>
+        /// Permet de vider les zones d'informations de la revue sélectionnée, ainsi que la zone d'image, lorsque aucune sélection n'est faite dans la liste des revues.
+        /// </summary>
         private void VideRevueCommandeInfos()
         {
             txbCommandeRevuePeriodicite.Text = "";
@@ -3357,14 +3625,18 @@ namespace MediaTekDocuments.view
             txbCommandeRevueTitre.Text = "";
             pcbCommandeRevueImage.Image = null;
         }
-
+        /// <summary>
+        /// Permet de réafficher la liste complète des revues, de réafficher la liste des commandes de la revue sélectionnée, et de vider les zones de recherche et de sélection des critères de recherche, lorsque l'on souhaite annuler les filtres appliqués à la liste des revues.
+        /// </summary>
         private void RemplirCommandeRevuesListeComplete()
         {
             RemplirRevuesListeCommandeTab(lesRevues);
             RemplirListeCommandeRevue(lesAbonnements);
             VideRevueCommandeZones();
         }
-
+        /// <summary>
+        /// Permet de vider les zones de recherche et de sélection des critères de recherche, lorsque l'on souhaite annuler les filtres appliqués à la liste des revues, sans réafficher la liste complète des revues ni la liste des commandes de la revue sélectionnée.
+        /// </summary>
         private void VideRevueCommandeZones()
         {
             cboCommandeRevueGenre.SelectedIndex = -1;
@@ -3373,6 +3645,11 @@ namespace MediaTekDocuments.view
             txbCommandeRechercheRevueTitre.Text = "";
             txbCommandeRechercheRevueNum.Text = "";
         }
+        /// <summary>
+        /// Lors de l'appui sur le bouton de recherche par numéro, affiche la revue dont le numéro correspond au numéro saisi, ou un message d'erreur si aucune revue ne correspond, et réaffiche la liste complète des revues si la zone de saisie du numéro est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeRevueRecherche_Click(object sender, EventArgs e)
         {
             if (!txbCommandeRechercheRevueNum.Text.Equals(""))
@@ -3398,22 +3675,38 @@ namespace MediaTekDocuments.view
                 RemplirCommandeRevuesListeComplete();
             }
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation des filtres Genres appliqués à la liste des revues, appelle la fonction RemplirCommandeRevuesListeComplete.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeRevueGenreSupp_Click(object sender, EventArgs e)
         {
             RemplirCommandeRevuesListeComplete();
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation des filtres Public appliqués à la liste des revues, appelle la fonction RemplirCommandeRevuesListeComplete.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeRevuePublicSupp_Click(object sender, EventArgs e)
         {
             RemplirCommandeRevuesListeComplete();
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'annulation des filtres Rayons appliqués à la liste des revues, appelle la fonction RemplirCommandeRevuesListeComplete.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommandeRevueRayonSupp_Click(object sender, EventArgs e)
         {
             RemplirCommandeRevuesListeComplete();
         }
-
+        /// <summary>
+        /// Lors de la sélection d'un genre dans le combo de sélection des genres, affiche les revues dont le genre correspond au genre sélectionné, ou un message d'erreur si aucune revue ne correspond, et réaffiche la liste complète des revues si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cboCommandeRevueGenre_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxRevuesGenres.SelectedIndex >= 0)
@@ -3427,7 +3720,11 @@ namespace MediaTekDocuments.view
                 cboCommandeRevuePublic.SelectedIndex = -1;
             }
         }
-
+        /// <summary>
+        /// Lors de la sélection d'un public dans le combo de sélection des publics, affiche les revues dont le public correspond au public sélectionné, ou un message d'erreur si aucune revue ne correspond, et réaffiche la liste complète des revues si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cboCommandeRevuePublic_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxRevuesPublics.SelectedIndex >= 0)
@@ -3441,6 +3738,11 @@ namespace MediaTekDocuments.view
                 cboCommandeRevueGenre.SelectedIndex = -1;
             }
         }
+        /// <summary>
+        /// Lors de la sélection d'un rayon dans le combo de sélection des rayons, affiche les revues dont le rayon correspond au rayon sélectionné, ou un message d'erreur si aucune revue ne correspond, et réaffiche la liste complète des revues si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void cboCommandeRevueRayon_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -3455,7 +3757,11 @@ namespace MediaTekDocuments.view
                 cboCommandeRevuePublic.SelectedIndex = -1;
             }
         }
-
+        /// <summary>
+        /// Lors de la saisie dans la zone de recherche par titre, affiche les revues dont le titre contient la chaîne de caractères saisie, ou un message d'erreur si aucune revue ne correspond, et réaffiche la liste complète des revues si la zone de saisie du numéro est vide, la zone de saisie du titre est vide et aucun élément combo sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txbCommandeRechercheRevueTitre_TextChanged(object sender, EventArgs e)
         {
             if (!txbCommandeRechercheRevueTitre.Text.Equals(""))
@@ -3478,7 +3784,11 @@ namespace MediaTekDocuments.view
                 }
             }
         }
-
+        /// <summary>
+        /// Lors de la sélection d'une revue dans la liste des revues, affiche les informations de la revue sélectionnée, récupère les abonnements associés à la revue sélectionnée, affiche la liste des abonnements de la revue sélectionnée, et active ou désactive les boutons de modification et de suppression en fonction de l'existence d'abonnements pour la revue sélectionnée.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvRevueListeTabCommande_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvRevueListeTabCommande.CurrentCell != null)
@@ -3510,6 +3820,10 @@ namespace MediaTekDocuments.view
                 VideRevueCommandeInfos();
             }
         }
+        /// <summary>
+        /// Permet de remplir le datagrid des abonnements avec la liste reçue en paramètre, et d'en masquer certaines colonnes pour n'afficher que les informations pertinentes.
+        /// </summary>
+        /// <param name="abonnements"></param>
         private void RemplirListeAbonnements(List<Abonnement> abonnements)
         {
             bdgCommandeListeRevue.DataSource = abonnements;
@@ -3518,7 +3832,11 @@ namespace MediaTekDocuments.view
             dgvCommandeRevueListe.Columns["id"].Visible = true;
             dgvCommandeRevueListe.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton de confirmation de l'ajout ou de la modification d'une commande de revue, vérifie que les champs obligatoires sont remplis, crée un objet Abonnement avec les informations saisies et les informations de la revue sélectionnée, ajoute ou modifie la commande en fonction de l'action en cours, rafraîchit la liste des abonnements de la revue sélectionnée, et appelle la fonction EndActionRevue pour réafficher les éléments graphiques de base, vider les champs modifiables et préparer les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande. Affiche également des messages d'erreur en cas de champs non remplis ou de points dans les champs numériques.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnComfirmerCommandeRevue_Click(object sender, EventArgs e)
         {
             Revue revue = (Revue)bdgRevuesListe.List[bdgRevuesListe.Position];
@@ -3568,11 +3886,18 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("Vous devez remplir toutes les informations", "Information");
             }
         }
-
+        /// <summary>
+        /// Appelle la fonction EndActionRevue pour réafficher les éléments graphiques de base, vider les champs modifiables et préparer les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande, lorsque l'on souhaite annuler l'ajout ou la modification d'une commande de revue.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAnnulerCommandeRevue_Click(object sender, EventArgs e)
         {
             EndActionRevue();
         }
+        /// <summary>
+        /// Permet de réafficher les éléments graphiques de base, de vider les champs modifiables et de préparer les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande, lorsque l'on souhaite annuler l'ajout ou la modification d'une commande de revue. Affiche également les éléments graphiques nécessaires pour l'ajout ou la modification d'une commande de revue, et masque les éléments graphiques qui ne sont pas nécessaires pour l'ajout ou la modification d'une commande de revue.
+        /// </summary>
         private void EndActionRevue()
         {
             groupBox7.Enabled = true;
@@ -3583,7 +3908,9 @@ namespace MediaTekDocuments.view
             dateTimePicker1.Value = DateTime.Now;
             textBox1.Text = string.Empty;
         }
-
+        /// <summary>
+        /// Permet d'afficher les éléments graphiques nécessaires pour l'ajout ou la modification d'une commande de revue, et de masquer les éléments graphiques qui ne sont pas nécessaires pour l'ajout ou la modification d'une commande de revue, lorsque l'on souhaite ajouter ou modifier une commande de revue. Affiche également les éléments graphiques de base, vide les champs modifiables et prépare les variables de contrôle pour une nouvelle action d'ajout ou de modification de commande, lorsque l'on souhaite ajouter ou modifier une commande de revue.
+        /// </summary>
         private void StartActionRevue()
         {
             groupBox7.Enabled = false;
@@ -3592,7 +3919,11 @@ namespace MediaTekDocuments.view
             groupBox9.Visible = true;
             groupBox9.Enabled = true;
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton de modification d'une commande de revue, affiche les éléments graphiques nécessaires pour la modification d'une commande de revue, masque les éléments graphiques qui ne sont pas nécessaires pour la modification d'une commande de revue, remplit les champs modifiables avec les informations de la commande de revue sélectionnée, et prépare les variables de contrôle pour une action de modification de commande de revue.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnModifCommandeRevue_Click(object sender, EventArgs e)
         {
             StartActionRevue();
@@ -3601,14 +3932,22 @@ namespace MediaTekDocuments.view
             textBox1.Text = dgvCommandeRevueListe.SelectedRows[0].Cells["Montant"].Value.ToString();
 
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton d'ajout d'une commande de revue, affiche les éléments graphiques nécessaires pour l'ajout d'une commande de revue, masque les éléments graphiques qui ne sont pas nécessaires pour l'ajout d'une commande de revue, vide les champs modifiables, et prépare les variables de contrôle pour une action d'ajout de commande de revue.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddCommandeRevue_Click(object sender, EventArgs e)
         {
             StartActionRevue();
             dateTimePicker1.Value = DateTime.Now;
             AjoutCommanderevue = true;
         }
-
+        /// <summary>
+        /// Lors de l'appui sur le bouton de suppression d'une commande de revue, vérifie que la suppression de la commande de revue ne rend pas les exemplaires associés à la revue sélectionnée interdits à la suppression, supprime la commande de revue sélectionnée si la suppression est autorisée, rafraîchit la liste des abonnements de la revue sélectionnée, et affiche un message d'erreur si la suppression n'est pas autorisée ou en cas d'erreur lors de la suppression.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSupprCommandeRevue_Click(object sender, EventArgs e)
         {
             string idDocuement = dgvCommandeRevueListe.SelectedRows[0].Cells["IdRevue"].Value.ToString();

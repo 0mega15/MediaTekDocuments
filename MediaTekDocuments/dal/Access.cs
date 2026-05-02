@@ -152,14 +152,22 @@ namespace MediaTekDocuments.dal
             List<Revue> lesRevues = TraitementRecup<Revue>(GET, "revue", null);
             return lesRevues;
         }
-
+        /// <summary>
+        /// Retourne tous les suivis d'un document à partir de la BDD
+        /// </summary>
+        /// <param name="idDocument"></param>
+        /// <returns></returns>
         public List<Suivi> GetAllSuivis(string idDocument)
         {
             String jsonIdDocument = ConvertToJson("id", idDocument);
             List<Suivi> lessuivis = TraitementRecup<Suivi>(GET, "suivi/" + jsonIdDocument, null);
             return lessuivis;
         }
-
+        /// <summary>
+        /// Retourne tous les abonnements d'une revue à partir de la BDD
+        /// </summary>
+        /// <param name="idDocument"></param>
+        /// <returns></returns>
         public List<Abonnement> GetAllAbonnements(string idDocument)
         {
             String jsonIdDocument = ConvertToJson("id", idDocument);
@@ -173,7 +181,7 @@ namespace MediaTekDocuments.dal
         /// <returns></returns>
         public List<Exemplaire> GetAllExemplairesType(string idExemplaire)
         {
-            String jsonIdDocument = convertToJson("id", idExemplaire);
+            String jsonIdDocument = ConvertToJson("id", idExemplaire);
             List<Exemplaire> lesExemplaires = TraitementRecup<Exemplaire>(GET, "exemplaireglobal/" + jsonIdDocument, null);
             return lesExemplaires;
         }
@@ -186,7 +194,10 @@ namespace MediaTekDocuments.dal
             List<Etat> lesEtats = TraitementRecup<Etat>(GET, "etat", null);
             return lesEtats;
         }
-        
+        /// <summary>
+        /// Retourne la liste de tous les abonnements arrivant à expiration dans les 30 prochains jours
+        /// </summary>
+        /// <returns></returns>
         public List<InfosExpiration> GetAbonnementExpiration()
         {
             List<InfosExpiration> lesAbonnementExpirations = TraitementRecup<InfosExpiration>(GET, "finAbonnement", null);
@@ -479,7 +490,11 @@ namespace MediaTekDocuments.dal
                 return false;
             }
         }
-
+        /// <summary>
+        /// Appelle l'API pour créer un suivi d'un document dans la base de données
+        /// </summary>
+        /// <param name="suivi"></param>
+        /// <returns></returns>
         public bool CreerSuivi(Suivi suivi)
         {
             String jsonSuivi = JsonConvert.SerializeObject(suivi, new CustomDateTimeConverter());
@@ -495,7 +510,11 @@ namespace MediaTekDocuments.dal
             }
             return false;
         }
-
+        /// <summary>
+        /// Appelle l'API pour modifier un suivi d'un document dans la base de données
+        /// </summary>
+        /// <param name="suivi"></param>
+        /// <returns></returns>
         public bool ModifiSuivi(Suivi suivi)
         {
             String jsonSuivi = JsonConvert.SerializeObject(suivi, new CustomDateTimeConverter());
@@ -510,7 +529,11 @@ namespace MediaTekDocuments.dal
             }
             return false;
         }
-
+        /// <summary>
+        /// Appelle l'API pour supprimer un suivi d'un document dans la base de données
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool SupprimerSuivi(string id)
         {
             try
@@ -526,7 +549,11 @@ namespace MediaTekDocuments.dal
             }
             return false;
         }
-
+        /// <summary>
+        /// Appelle l'API pour créer un abonnement d'une revue dans la base de données
+        /// </summary>
+        /// <param name="abonnement"></param>
+        /// <returns></returns>
         public bool CreerAbonnement(Abonnement abonnement)
         {
             String jsonAbonnement = JsonConvert.SerializeObject(abonnement, new CustomDateTimeConverter());
@@ -542,7 +569,11 @@ namespace MediaTekDocuments.dal
             }
             return false;
         }
-
+        /// <summary>
+        /// Appelle l'API pour modifier un abonnement d'une revue dans la base de données
+        /// </summary>
+        /// <param name="abonnement"></param>
+        /// <returns></returns>
         public bool ModifiAbonnement(Abonnement abonnement)
         {
             String jsonAbonnement = JsonConvert.SerializeObject(abonnement, new CustomDateTimeConverter());
@@ -558,7 +589,11 @@ namespace MediaTekDocuments.dal
             }
             return false;
         }
-
+        /// <summary>
+        /// Appelle l'API pour supprimer un abonnement d'une revue dans la base de données
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool SupprimerAbonnement(string id)
         {
             try
