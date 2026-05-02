@@ -59,7 +59,6 @@
             this.txbLogin.Name = "txbLogin";
             this.txbLogin.Size = new System.Drawing.Size(237, 22);
             this.txbLogin.TabIndex = 2;
-            this.txbLogin.Text = "jdupont";
             // 
             // txbPassword
             // 
@@ -68,7 +67,6 @@
             this.txbPassword.PasswordChar = '*';
             this.txbPassword.Size = new System.Drawing.Size(237, 22);
             this.txbPassword.TabIndex = 3;
-            this.txbPassword.Text = "mdp123";
             // 
             // btnConnexion
             // 
