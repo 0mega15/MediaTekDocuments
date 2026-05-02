@@ -1,6 +1,6 @@
 ﻿namespace MediaTekDocuments
 {
-    partial class Form1
+    partial class FrmAvertissement
     {
         /// <summary>
         /// Required designer variable.
