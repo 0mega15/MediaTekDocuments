@@ -18,11 +18,13 @@ Lors de l'appui d'un des 3 boutons de la gestion des documents il est possible l
 #### Gestion des commandes
 <img width="1100" height="886" alt="image" src="https://github.com/user-attachments/assets/eb8c9087-3278-497c-af93-547fecde3444" />
 Lors de la selection d'un document il est possible de voir les commandes qui lui sont associé, et donc aussi de les modifier ou supprimer.<br>
+## BDD
+Pour installer la base de donnée télécharger le fichier sql mediatek86_full.sql et l'importer dans phpMyAdmin.
 ## L'API REST
 L'accès à la BDD se fait à travers une API REST protégée par une authentification basique.<br>
 Le code de l'API se trouve ici :<br>
 https://github.com/CNED-SLAM/rest_mediatekdocuments<br>
-avec toutes les explications pour l'utiliser (dans le readme).
+avec toutes les explications pour l'utiliser (dans le readme).<br>
 ## Installation de l'application
 Ce mode opératoire permet d'installer l'application pour pouvoir travailler dessus.<br>
 - Installer Visual Studio 2019 entreprise et les extension Specflow et newtonsoft.json (pour ce dernier, voir l'article "Accéder à une API REST à partir d'une application C#" dans le wiki de ce dépôt : consulter juste le début pour la configuration, car la suite permet de comprendre le code existant).<br>
