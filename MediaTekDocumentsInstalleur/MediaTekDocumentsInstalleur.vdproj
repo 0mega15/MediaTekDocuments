@@ -16,13 +16,7 @@
         "Entry"
         {
         "MsmKey" = "8:_29EC4B6A52E014BDCDF106FA1A084E0B"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -34,7 +28,7 @@
         "Entry"
         {
         "MsmKey" = "8:_42438D7A6BE7AC2452989B0E905F4344"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -52,19 +46,19 @@
         "Entry"
         {
         "MsmKey" = "8:_67D0B56EC45A19395C979F09627885EC"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_72E1AC929336323BF5EB0025B81CF21C"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_89E2623122674F1BD118821BE22302DA"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,13 +70,13 @@
         "Entry"
         {
         "MsmKey" = "8:_8C1136120CF75DA20E5217758BB6B5BA"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_953052F3BB4D24CCC0D1C1BD07F2C902"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +100,7 @@
         "Entry"
         {
         "MsmKey" = "8:_9B4F4187EEF08D59F9F7B685B51B9FE0"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -124,7 +118,7 @@
         "Entry"
         {
         "MsmKey" = "8:_A2C1E9556BA05F4136BFC2327CD5A649"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,7 +130,7 @@
         "Entry"
         {
         "MsmKey" = "8:_ADD8DACC39D0EA9E810D16B57AB07063"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -154,7 +148,7 @@
         "Entry"
         {
         "MsmKey" = "8:_B7BE842F1C994F30D556AB76EDD6DB3E"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -172,7 +166,13 @@
         "Entry"
         {
         "MsmKey" = "8:_C0E4648C62D85A5886179715617306AB"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -184,7 +184,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3065B9ADD1A84568BBF852297DE95C8F"
+        "OwnerKey" = "8:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -271,6 +271,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -287,6 +295,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -745,7 +769,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MediaTekDocumentsInstalleur"
         "ProductCode" = "8:{C053A1CA-CD99-4E0C-991B-3B159D9166EB}"
-        "PackageCode" = "8:{2209E766-C94E-4666-A371-5B7431FBD3E8}"
+        "PackageCode" = "8:{26F76AB7-BDFD-4177-9199-B5361E16F91F}"
         "UpgradeCode" = "8:{92AAC036-1926-49CD-8BEA-F6F27156D05A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1264,7 +1288,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3065B9ADD1A84568BBF852297DE95C8F"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D8DC64E0B24C4B3D9777A0624BD0E6E2"
             {
             "SourcePath" = "8:..\\MediaTekDocuments\\obj\\Release\\MediaTekDocuments.exe"
             "TargetName" = "8:"
